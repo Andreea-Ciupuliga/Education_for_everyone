@@ -19,4 +19,8 @@ public class GetGroupDto {
 
     private Long availableSeats;
 
+    private String professorLastName;
+
+    private String professorFirstName;
+
 }

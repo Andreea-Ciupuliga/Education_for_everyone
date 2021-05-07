@@ -100,7 +100,7 @@ public class GroupService {
 
 
     @SneakyThrows
-    public List<Group> getAllGroupsBySubject(String subject) {
+    public List<GetGroupDto> getAllGroupsBySubject(String subject) {
 
         if(groupRepository.findAllBySubjectContains(subject).isEmpty())
         {

@@ -65,7 +65,7 @@ public class GroupController {
 
 
     @GetMapping("/showGroupsBySubject")
-    public List<Group> getAllGroups(@RequestParam String subject) {
+    public List<GetGroupDto> getAllGroups(@RequestParam String subject) {
 
         return groupService.getAllGroupsBySubject(subject);
     }

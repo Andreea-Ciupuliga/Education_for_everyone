@@ -1,6 +1,8 @@
 package com.example.Education_for_everyone.controller;
 
 
+import com.example.Education_for_everyone.dtos.GetGroupDto;
+import com.example.Education_for_everyone.dtos.GetStudentDto;
 import com.example.Education_for_everyone.service.GroupOfStudentsService;
 import com.example.Education_for_everyone.utils.SuccessDto;
 import lombok.SneakyThrows;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/groupOfStudents")
@@ -37,5 +41,11 @@ public class GroupOfStudentsController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
+
+    @GetMapping("/showStudentsByGroupId")
+    public List<GetStudentDto> getAllStudentsByGroupId(@RequestParam Long groupId) {
+
+        return groupOfStudentsService.getAllStudentsByGroupId(groupId);
+    }
 
 }

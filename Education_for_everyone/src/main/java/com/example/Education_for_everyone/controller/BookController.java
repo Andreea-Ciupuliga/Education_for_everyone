@@ -72,10 +72,10 @@ public class BookController {
         return bookService.getAllBooksByTitle(title);
     }
 
-//    @GetMapping("/showBooksByAuthor")
-//    public List<GetBookDto> getAllBooksByAuthor(@RequestParam String author) {
-//
-//        return bookService.getAllBooksByAuthor(author);
-//    }
+    @GetMapping("/showBooksByAuthor")
+    public List<GetBookDto> getAllBooksByAuthor(@RequestParam String author) {
+
+        return bookService.getAllBooksByAuthor(author);
+    }
 
 }

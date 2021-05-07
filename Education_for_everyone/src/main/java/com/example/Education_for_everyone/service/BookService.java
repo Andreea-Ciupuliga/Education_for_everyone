@@ -101,15 +101,15 @@ public class BookService {
         return bookRepository.findAllByTitleContains(title);
     }
 
-//    @SneakyThrows
-//    public List<GetBookDto> getAllBooksByAuthor(String author) {
-//
-//        if(bookRepository.findAllByAuthorContains(author).isEmpty())
-//        {
-//            throw new BookNotFoundException("Author Not Found");
-//        }
-//
-//        return bookRepository.findAllByAuthorContains(author);
-//    }
+    @SneakyThrows
+    public List<GetBookDto> getAllBooksByAuthor(String author) {
+
+        if(bookRepository.findAllByAuthorContains(author).isEmpty())
+        {
+            throw new BookNotFoundException("Author Not Found");
+        }
+
+        return bookRepository.findAllByAuthorContains(author);
+    }
 
 }
