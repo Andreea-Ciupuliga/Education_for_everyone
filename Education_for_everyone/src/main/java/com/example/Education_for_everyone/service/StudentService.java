@@ -16,12 +16,17 @@ public class StudentService {
 
     private StudentRepository studentRepository;
     private SendEmailService sendEmailService;
+    private final KeycloakAdminService keycloakAdminService; //ca sa pot face salvarea de useri si in keycloak
+
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, SendEmailService sendEmailService) {
+    public StudentService(StudentRepository studentRepository, SendEmailService sendEmailService, KeycloakAdminService keycloakAdminService) {
         this.studentRepository = studentRepository;
         this.sendEmailService = sendEmailService;
+        this.keycloakAdminService = keycloakAdminService;
     }
+
+
 
 
 
@@ -48,6 +53,10 @@ public class StudentService {
                 .username(registerStudentDto.getUsername()).build();
 
         studentRepository.save(student);
+
+
+        keycloakAdminService.registerUser(registerStudentDto.getUsername(), registerStudentDto.getPassword(), "ROLE_STUDENT");
+        //specificam direct ROLE_STUDENT ptc nu vrem ca cine inregistreaza din postman sa poata decide ce rol sa aiba
 
     }
 

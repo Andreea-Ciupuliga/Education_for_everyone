@@ -16,12 +16,17 @@ public class ProfessorService {
 
     private ProfessorRepository professorRepository;
     private SendEmailService sendEmailService;
+    private final KeycloakAdminService keycloakAdminService; //ca sa pot face salvarea de useri si in keycloak
 
     @Autowired
-    public ProfessorService(ProfessorRepository professorRepository, SendEmailService sendEmailService) {
+    public ProfessorService(ProfessorRepository professorRepository, SendEmailService sendEmailService, KeycloakAdminService keycloakAdminService) {
         this.professorRepository = professorRepository;
         this.sendEmailService = sendEmailService;
+        this.keycloakAdminService = keycloakAdminService;
     }
+
+
+
 
     @SneakyThrows
     public void registerProfessor(RegisterProfessorDto registerProfessorDto)
@@ -30,7 +35,7 @@ public class ProfessorService {
         if(professorRepository.findByUsername(registerProfessorDto.getUsername()).isPresent())
         {
 
-            throw new UserAlreadyExistException("User Already Exist");
+            throw new UserAlreadyExistException("Professor Already Exist");
 
         }
 
@@ -46,6 +51,9 @@ public class ProfessorService {
                 .subject(registerProfessorDto.getSubject()).build();
 
         professorRepository.save(professor);
+
+        keycloakAdminService.registerUser(registerProfessorDto.getUsername(),registerProfessorDto.getPassword(), "ROLE_PROFESSOR");
+        //specificam direct ROLE_STUDENT ptc nu vrem ca cine inregistreaza din postman sa poata decide ce rol sa aiba
 
     }
 
@@ -97,5 +105,11 @@ public class ProfessorService {
 
     }
 
+//    @SneakyThrows
+//    public Professor getUser(String username) {
+//        Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
+//        //user.setPassword(""); //ca sa nu ne afiseze si parola cand returnam toate datele in postman
+//        return professor;
+//    }
 
 }

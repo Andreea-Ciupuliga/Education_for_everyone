@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/education_for_everyone
@@ -24,3 +26,19 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  # ca sa ne conectam la keycloak
+keycloak:
+  realm: education_for_everyone
+  resource: project-client #se refera la client
+  public-client: true
+  auth-server-url: http://localhost:8080/auth
+  bearer-only: true
+  ssl-required: none
+
+  #pentru ca sa ne conectam ca admin sa putem modifica chestii in keycloak (interfata de unde modificam noi manual)
+admin-keycloak:
+  username: admin
+  password: admin
+  realm: master
+  client: admin-cli
