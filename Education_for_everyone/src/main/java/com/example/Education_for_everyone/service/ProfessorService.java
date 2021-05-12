@@ -1,8 +1,10 @@
 package com.example.Education_for_everyone.service;
 
 import com.example.Education_for_everyone.SendEmailService;
+import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
+import com.example.Education_for_everyone.exceptions.GroupNotFoundException;
 import com.example.Education_for_everyone.exceptions.UserAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.UserNotFoundException;
 import com.example.Education_for_everyone.models.Professor;
@@ -10,6 +12,8 @@ import com.example.Education_for_everyone.repository.ProfessorRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfessorService {
@@ -58,10 +62,17 @@ public class ProfessorService {
     }
 
     @SneakyThrows
-    public void removeProfessor(Long professorId)
+    public void removeProfessor(Long professorId,String username)
     {
         Professor professor = professorRepository.findById(professorId).orElseThrow(()->new UserNotFoundException("professor not found"));
-        professorRepository.delete(professor);
+
+        if(username.equals("admin") || username.equals(professor.getUsername()))
+            professorRepository.delete(professor);
+
+
+        else if(!(username.equals(professor.getUsername())))
+            throw new UserNotFoundException("you cannot delete another teacher's account");
+
     }
 
     @SneakyThrows
@@ -79,37 +90,59 @@ public class ProfessorService {
     }
 
     @SneakyThrows
-    public void putProfessor(Long professorId, RegisterProfessorDto newRegisterProfessorDto)
+    public void putProfessor(Long professorId, RegisterProfessorDto newRegisterProfessorDto,String username)
     {
         Professor professor = professorRepository.findById(professorId).orElseThrow(()->new UserNotFoundException("professor not found"));
 
-        if(newRegisterProfessorDto.getFirstName()!=null)
-            professor.setFirstName(newRegisterProfessorDto.getFirstName());
+        if(username.equals("admin") || username.equals(professor.getUsername()))
+        {
+            if (newRegisterProfessorDto.getFirstName() != null)
+                professor.setFirstName(newRegisterProfessorDto.getFirstName());
 
-        if(newRegisterProfessorDto.getLastName()!=null)
-            professor.setLastName(newRegisterProfessorDto.getLastName());
+            if (newRegisterProfessorDto.getLastName() != null)
+                professor.setLastName(newRegisterProfessorDto.getLastName());
 
-        if(newRegisterProfessorDto.getEmail()!=null)
-            professor.setEmail(newRegisterProfessorDto.getEmail());
+            if (newRegisterProfessorDto.getEmail() != null)
+                professor.setEmail(newRegisterProfessorDto.getEmail());
 
-        if(newRegisterProfessorDto.getPassword()!=null)
-            professor.setPassword(newRegisterProfessorDto.getPassword());
+            if (newRegisterProfessorDto.getPassword() != null)
+                professor.setPassword(newRegisterProfessorDto.getPassword());
 
-        if(newRegisterProfessorDto.getUsername()!=null)
-            professor.setUsername(newRegisterProfessorDto.getUsername());
+            if (newRegisterProfessorDto.getUsername() != null)
+                professor.setUsername(newRegisterProfessorDto.getUsername());
 
-        if(newRegisterProfessorDto.getSubject()!=null)
-            professor.setSubject(newRegisterProfessorDto.getSubject());
+            if (newRegisterProfessorDto.getSubject() != null)
+                professor.setSubject(newRegisterProfessorDto.getSubject());
 
-        professorRepository.save(professor);
+            professorRepository.save(professor);
+        }
+
+        else if(!(username.equals(professor.getUsername())))
+            throw new UserNotFoundException("you cannot edit another teacher's account");
 
     }
 
-//    @SneakyThrows
-//    public Professor getUser(String username) {
-//        Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
-//        //user.setPassword(""); //ca sa nu ne afiseze si parola cand returnam toate datele in postman
-//        return professor;
-//    }
+
+    @SneakyThrows
+    public List<GetProfessorDto> getAllProfessors() {
+
+        if(professorRepository.findAllProfessors().isEmpty())
+            throw new UserNotFoundException("there are no professors to display");
+
+        //afisam toti profesorii
+        return professorRepository.findAllProfessors();
+    }
+
+    @SneakyThrows
+    public List<GetProfessorDto> getAllProfessorsByName(String professorName) {
+
+        //cautam toti profesorii cu numele respectiv
+        if(professorRepository.findAllProfessorsByName(professorName).isEmpty())
+        {
+            throw new UserNotFoundException("Professors Not Found");
+        }
+
+        return professorRepository.findAllProfessorsByName(professorName);
+    }
 
 }

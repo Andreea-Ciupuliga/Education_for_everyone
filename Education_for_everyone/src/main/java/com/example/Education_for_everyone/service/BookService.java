@@ -2,6 +2,7 @@ package com.example.Education_for_everyone.service;
 
 
 import com.example.Education_for_everyone.dtos.GetBookDto;
+import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.RegisterBookDto;
 import com.example.Education_for_everyone.exceptions.BookAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.BookNotFoundException;
@@ -88,6 +89,17 @@ public class BookService {
         bookRepository.save(book);
 
 
+    }
+
+
+    @SneakyThrows
+    public List<GetBookDto> getAllBooks() {
+
+        if(bookRepository.findAllBooks().isEmpty())
+            throw new BookNotFoundException("there are no books to display");
+
+        //afisam toate cartile
+        return bookRepository.findAllBooks();
     }
 
     @SneakyThrows

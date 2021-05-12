@@ -1,15 +1,21 @@
 package com.example.Education_for_everyone.controller;
 
 
+import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
 import com.example.Education_for_everyone.service.ProfessorService;
+import com.example.Education_for_everyone.utils.Helper;
 import com.example.Education_for_everyone.utils.SuccessDto;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+
+import java.util.List;
 
 @RestController
 
@@ -32,11 +38,12 @@ public class ProfessorController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @DeleteMapping()
     @SneakyThrows
-    public ResponseEntity<SuccessDto>removeProfessor(@RequestParam Long professorId)
+    public ResponseEntity<SuccessDto>removeProfessor(@RequestParam Long professorId,Authentication authentication)
     {
-        professorService.removeProfessor(professorId);
+        professorService.removeProfessor(professorId, Helper.getKeycloakUser(authentication));
 
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
@@ -50,6 +57,8 @@ public class ProfessorController {
 //        return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
 //    }
 
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping()
     @SneakyThrows
     public ResponseEntity<GetProfessorDto>getProfessor(@RequestParam Long professorId)
@@ -58,12 +67,26 @@ public class ProfessorController {
         return new ResponseEntity<>(professorService.getProfessor(professorId), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @GetMapping("/showProfessors")
+    public ResponseEntity<List<GetProfessorDto>> getAllAllProfessors() {
 
+        return new ResponseEntity<>(professorService.getAllProfessors(), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @GetMapping("/showProfessorsByName")
+    public ResponseEntity<List<GetProfessorDto>> getAllProfessorsByName(@RequestParam String professorName) {
+
+        return new ResponseEntity<>(professorService.getAllProfessorsByName(professorName), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @PutMapping()
     @SneakyThrows
-    public ResponseEntity<SuccessDto>putProfessor(@RequestParam Long professorId,@RequestBody RegisterProfessorDto registerProfessorDto)
+    public ResponseEntity<SuccessDto>putProfessor(@RequestParam Long professorId,@RequestBody RegisterProfessorDto registerProfessorDto,Authentication authentication)
     {
-        professorService.putProfessor(professorId,registerProfessorDto);
+        professorService.putProfessor(professorId,registerProfessorDto,Helper.getKeycloakUser(authentication));
 
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }

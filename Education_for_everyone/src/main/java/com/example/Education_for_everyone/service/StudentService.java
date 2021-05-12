@@ -1,6 +1,7 @@
 package com.example.Education_for_everyone.service;
 
 import com.example.Education_for_everyone.SendEmailService;
+import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.GetStudentDto;
 import com.example.Education_for_everyone.dtos.RegisterStudentDto;
 import com.example.Education_for_everyone.exceptions.UserAlreadyExistException;
@@ -10,6 +11,8 @@ import com.example.Education_for_everyone.repository.StudentRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -62,10 +65,16 @@ public class StudentService {
 
 
     @SneakyThrows
-    public void removeStudent(Long studentId)
+    public void removeStudent(Long studentId,String username)
     {
         Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
-        studentRepository.delete(student);
+
+        if(username.equals("admin") || username.equals(student.getUsername()))
+            studentRepository.delete(student);
+
+        else if(!(username.equals(student.getUsername())))
+            throw new UserNotFoundException("you cannot delete another student's account");
+
     }
 
     @SneakyThrows
@@ -83,31 +92,56 @@ public class StudentService {
     }
 
     @SneakyThrows
-    public void putStudent(Long studentId,RegisterStudentDto newRegisterStudentDto)
+    public void putStudent(Long studentId,RegisterStudentDto newRegisterStudentDto,String username)
     {
         Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
 
-        if(newRegisterStudentDto.getFirstName()!=null)
-            student.setFirstName(newRegisterStudentDto.getFirstName());
+        if(username.equals("admin") || username.equals(student.getUsername())) {
+            if (newRegisterStudentDto.getFirstName() != null)
+                student.setFirstName(newRegisterStudentDto.getFirstName());
 
-        if(newRegisterStudentDto.getLastName()!=null)
-            student.setLastName(newRegisterStudentDto.getLastName());
+            if (newRegisterStudentDto.getLastName() != null)
+                student.setLastName(newRegisterStudentDto.getLastName());
 
-        if(newRegisterStudentDto.getEmail()!=null)
-            student.setEmail(newRegisterStudentDto.getEmail());
+            if (newRegisterStudentDto.getEmail() != null)
+                student.setEmail(newRegisterStudentDto.getEmail());
 
-        if(newRegisterStudentDto.getPassword()!=null)
-            student.setPassword(newRegisterStudentDto.getPassword());
+            if (newRegisterStudentDto.getPassword() != null)
+                student.setPassword(newRegisterStudentDto.getPassword());
 
-        if(newRegisterStudentDto.getUsername()!=null)
-            student.setUsername(newRegisterStudentDto.getUsername());
+            if (newRegisterStudentDto.getUsername() != null)
+                student.setUsername(newRegisterStudentDto.getUsername());
 
 
-        studentRepository.save(student);
+            studentRepository.save(student);
+        }
+
+        else if(!(username.equals(student.getUsername())))
+            throw new UserNotFoundException("you cannot edit another student's account");
 
     }
 
 
+    @SneakyThrows
+    public List<GetStudentDto> getAllStudents() {
 
+        if(studentRepository.findAllStudents().isEmpty())
+            throw new UserNotFoundException("there are no students to display");
+
+
+        return studentRepository.findAllStudents();
+    }
+
+    @SneakyThrows
+    public List<GetStudentDto> getAllStudentsByName(String studentName) {
+
+
+        if(studentRepository.findAllStudentsByName(studentName).isEmpty())
+        {
+            throw new UserNotFoundException("Students Not Found");
+        }
+
+        return studentRepository.findAllStudentsByName(studentName);
+    }
 
 }

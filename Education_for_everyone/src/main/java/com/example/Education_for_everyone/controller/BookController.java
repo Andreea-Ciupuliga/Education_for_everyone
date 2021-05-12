@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register")
     @SneakyThrows
     public ResponseEntity<SuccessDto> registerBook(@RequestBody RegisterBookDto registerBookDto)
@@ -38,7 +40,7 @@ public class BookController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping()
     @SneakyThrows
     public ResponseEntity<SuccessDto>removeBook(@RequestParam Long bookId)
@@ -48,6 +50,7 @@ public class BookController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping()
     @SneakyThrows
     public ResponseEntity<GetBookDto>getBook(@RequestParam Long bookId)
@@ -56,6 +59,7 @@ public class BookController {
         return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping()
     @SneakyThrows
     public ResponseEntity<SuccessDto>putBook(@RequestParam Long bookId,@RequestBody RegisterBookDto registerBookDto)
@@ -65,17 +69,25 @@ public class BookController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @GetMapping("/showBooks")
+    public ResponseEntity<List<GetBookDto>> getAllBooks() {
 
-    @GetMapping("/showBooksByTitle")
-    public List<GetBookDto> getAllBooksByTitle(@RequestParam String title) {
-
-        return bookService.getAllBooksByTitle(title);
+        return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
     }
 
-    @GetMapping("/showBooksByAuthor")
-    public List<GetBookDto> getAllBooksByAuthor(@RequestParam String author) {
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @GetMapping("/showBooksByTitle")
+    public ResponseEntity<List<GetBookDto>> getAllBooksByTitle(@RequestParam String title) {
 
-        return bookService.getAllBooksByAuthor(author);
+        return new ResponseEntity<>(bookService.getAllBooksByTitle(title), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @GetMapping("/showBooksByAuthor")
+    public ResponseEntity<List<GetBookDto>> getAllBooksByAuthor(@RequestParam String author) {
+
+        return new ResponseEntity<>(bookService.getAllBooksByAuthor(author), HttpStatus.OK);
     }
 
 }

@@ -136,6 +136,9 @@ public class GroupService {
     @SneakyThrows
     public List<GetGroupDto> getAllGroups() {
 
+        if(groupRepository.findAllGroups().isEmpty())
+            throw new GroupNotFoundException("there are no groups to display");
+
         //afisam toate grupurile
         return groupRepository.findAllGroups();
     }

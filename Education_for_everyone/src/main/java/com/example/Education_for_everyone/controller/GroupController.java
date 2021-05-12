@@ -24,13 +24,12 @@ import java.util.List;
 @RequestMapping("/group")
 public class GroupController {
 
-    private ProfessorService professorService;
+
     private GroupService groupService;
 
 
     @Autowired
-    public GroupController(ProfessorService professorService, GroupService groupService) {
-        this.professorService = professorService;
+    public GroupController(GroupService groupService) {
         this.groupService = groupService;
     }
 
