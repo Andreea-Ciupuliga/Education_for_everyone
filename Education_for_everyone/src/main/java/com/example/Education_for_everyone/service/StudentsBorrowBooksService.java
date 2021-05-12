@@ -25,13 +25,13 @@ public class StudentsBorrowBooksService {
     }
 
     @SneakyThrows
-    public void borrowBook(Long studentId,Long bookId)
+    public void borrowBook(String username,Long bookId)
     {
 
-        Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
+        Student student = studentRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("student not found"));
         Book book = bookRepository.findById(bookId).orElseThrow(()->new BookNotFoundException("book not found"));
 
-        if(studentsBorrowBooksRepository.findBystudentIdAndbookId(studentId,bookId).isPresent())
+        if(studentsBorrowBooksRepository.findBystudentIdAndbookId(student.getId(),bookId).isPresent())
         {
             throw new UserAlreadyExistException("student has already borrowed this book");
         }
@@ -56,15 +56,12 @@ public class StudentsBorrowBooksService {
     }
 
     @SneakyThrows
-    public void removeBookFromStudent(Long studentId,Long bookId) {
+    public void removeBookFromStudent(String username,Long bookId) {
 
-        if(studentRepository.findById(studentId).isEmpty())
-        {
-            throw new UserNotFoundException("student not found");
-        }
+        Student student = studentRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("student not found"));
 
         Book book = bookRepository.findById(bookId).orElseThrow(()->new BookNotFoundException("book not found"));
-        StudentsBorrowBooks studentsBorrowBooks=studentsBorrowBooksRepository.findBystudentIdAndbookId(studentId,bookId).orElseThrow(()->new BookAndStudentDoNotMatchException("Book And Student Do Not Match"));
+        StudentsBorrowBooks studentsBorrowBooks=studentsBorrowBooksRepository.findBystudentIdAndbookId(student.getId(),bookId).orElseThrow(()->new BookAndStudentDoNotMatchException("Book And Student Do Not Match"));
 
         studentsBorrowBooksRepository.delete(studentsBorrowBooks);
 
