@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
-
 @RequestMapping("/book")
 public class BookController {
 
@@ -55,7 +53,6 @@ public class BookController {
     @SneakyThrows
     public ResponseEntity<GetBookDto>getBook(@RequestParam Long bookId)
     {
-
         return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
     }
 

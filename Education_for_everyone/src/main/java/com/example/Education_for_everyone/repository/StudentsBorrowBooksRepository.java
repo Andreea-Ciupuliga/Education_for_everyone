@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface StudentsBorrowBooksRepository  extends JpaRepository<StudentsBorrowBooks, Long> {
+
     @Query("SELECT b from StudentsBorrowBooks b where b.student.id =:studentId AND b.book.id =:bookId")
     Optional<StudentsBorrowBooks> findBystudentIdAndbookId(@Param("studentId") Long studentId, @Param("bookId")Long bookId);
 

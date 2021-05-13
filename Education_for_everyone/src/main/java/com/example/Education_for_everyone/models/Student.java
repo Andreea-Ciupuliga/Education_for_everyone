@@ -43,4 +43,9 @@ public class Student {
     @OneToMany(mappedBy = "student",orphanRemoval = true,cascade = {CascadeType.ALL})
     List<GroupOfStudents> groupOfStudents;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "student",orphanRemoval = true,cascade = {CascadeType.ALL})
+    List<Grade> grade;
+
+
 }
