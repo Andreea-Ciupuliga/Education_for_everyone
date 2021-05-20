@@ -56,6 +56,7 @@ public class GroupOfStudentsService {
             throw new NotEnoughAvailableSeatsException("Not Enough Available Seats");
         }
 
+
         //daca este admin poate adauga studentul in grup
         if(username.equals("admin"))
         {
