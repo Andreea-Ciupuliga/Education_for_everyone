@@ -80,7 +80,7 @@ class ProfessorServiceTest {
 
         //Assert
         verify(professorRepository, times(1)).findByUsername(username);//verific daca se face interactiunea cu findByUsername doar o data
-        verify(professorRepository, times(1)).save(any(Professor.class));//verific daca save-ul sa se apeleze o datea
+        verify(professorRepository, times(1)).save(any(Professor.class));//verific daca save-ul sa se apeleze o data
     }
 
     @Test
@@ -104,5 +104,28 @@ class ProfessorServiceTest {
         Assertions.assertEquals(lastName,result.getLastName());//rezultatul meu trebuie sa aiba lastName egal cu lastName pe care il definesc eu in Arrange
         verify(professorRepository).findById(anyLong());
     }
+
+    @Test
+    void deleteUserShouldSucceed() {
+        //Arrange
+        Long id=1L;
+        String email = "random@email";
+        String firstName = "First name";
+        String username = "Username";
+        String lastName="Last name";
+        Professor professor = Professor.builder().id(id).email(email).firstName(firstName).lastName(lastName).username(username).build();
+
+        //Act
+        when(professorRepository.findById(professor.getId())).thenReturn(Optional.of(professor));
+        //cand cauta profesorul dupa id returnez un optional de professor ptc l-a gasit in baza de date
+
+        professorService.removeProfessor(professor.getId(),username);
+
+        //Assert
+        verify(professorRepository, times(1)).findById(professor.getId());//verific daca se face interactiunea cu findById doar o data
+        verify(professorRepository,times(1)).delete(professor);//verific daca delete-ul sa se apeleze o data
+
+    }
+
 
 }
