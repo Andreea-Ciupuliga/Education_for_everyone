@@ -28,7 +28,7 @@ public class GroupService {
     @SneakyThrows
     public void registerGroup(RegisterGroupDto registerGroupDto,String username)
     {
-        //Cautam profesorul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
+        //Cautam profesorul care vrea sa faca grupul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
         Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
 
         //verificam daca exista deja un grup cu numele asta
@@ -38,7 +38,7 @@ public class GroupService {
         }
 
         Group group = Group.builder()
-                .professor(Professor.builder().id(professor.getId()).build())
+                .professor(Professor.builder().id(professor.getId()).build()) //id ul profesorului o sa il dam automat de la profesorul gasit dupa username
                 .groupName(registerGroupDto.getGroupName())
                 .subject(registerGroupDto.getSubject())
                 .yearOfStudy(registerGroupDto.getYearOfStudy())
@@ -76,14 +76,11 @@ public class GroupService {
                     throw new UserNotFoundException("Professor not in this group. You cannot delete a group you are not part of");
                 }
              }
-
-
     }
 
     @SneakyThrows
     public GetGroupDto getGroup(Long groupId)
     {
-
         //verificam daca exista grupul cu id-ul respectiv
         Group group = groupRepository.findById(groupId).orElseThrow(()->new GroupNotFoundException("group not found"));
 
@@ -126,10 +123,7 @@ public class GroupService {
             if(newRegisterGroupDto.getTotalSeats()!=null)
                 group.setTotalSeats(newRegisterGroupDto.getTotalSeats());
 
-
             groupRepository.save(group);
-
-
     }
 
 
@@ -167,10 +161,5 @@ public class GroupService {
 
         return groupRepository.findAllByProfessorNameContains(professorName);
     }
-
-
-
-
-
 
 }

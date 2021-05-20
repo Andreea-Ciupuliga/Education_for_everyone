@@ -15,6 +15,7 @@ import java.util.Optional;
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor,Long> {
     Optional<Professor> findByUsername(String name);
+    Optional<Professor> findByEmail(String email);
 
     @Query("SELECT new com.example.Education_for_everyone.dtos.GetProfessorDto(p.firstName,p.lastName,p.email) FROM Professor p")
     List<GetProfessorDto> findAllProfessors();

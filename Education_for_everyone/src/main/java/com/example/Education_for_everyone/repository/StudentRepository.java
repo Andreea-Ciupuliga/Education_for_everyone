@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository<Student,Long> {
     Optional<Student> findByUsername(String name);
 
+    Optional<Student> findByEmail(String email);
+
     @Query("SELECT new com.example.Education_for_everyone.dtos.GetStudentDto(s.firstName,s.lastName,s.email) FROM Student s")
     List<GetStudentDto> findAllStudents();
 

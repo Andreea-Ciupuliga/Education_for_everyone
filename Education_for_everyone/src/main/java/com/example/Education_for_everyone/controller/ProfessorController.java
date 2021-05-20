@@ -34,7 +34,6 @@ public class ProfessorController {
     public ResponseEntity<SuccessDto> registerProfessor(@RequestBody RegisterProfessorDto registerProfessorDto)
     {
         professorService.registerProfessor(registerProfessorDto);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -44,18 +43,18 @@ public class ProfessorController {
     public ResponseEntity<SuccessDto>removeProfessor(@RequestParam Long professorId,Authentication authentication)
     {
         professorService.removeProfessor(professorId, Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
-//    @DeleteMapping("/all")
-//    @SneakyThrows
-//    public ResponseEntity<SuccessDto>removeAllProfessors()
-//    {
-//        professorService.removeAllProfessors();
-//
-//        return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/all")
+    @SneakyThrows
+    public ResponseEntity<SuccessDto>removeAllProfessors()
+    {
+        professorService.removeAllProfessors();
+
+        return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
+    }
 
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -63,10 +62,10 @@ public class ProfessorController {
     @SneakyThrows
     public ResponseEntity<GetProfessorDto>getProfessor(@RequestParam Long professorId)
     {
-
         return new ResponseEntity<>(professorService.getProfessor(professorId), HttpStatus.OK);
     }
 
+    //afisam toti profesorii
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping("/showProfessors")
     public ResponseEntity<List<GetProfessorDto>> getAllAllProfessors() {
@@ -87,7 +86,6 @@ public class ProfessorController {
     public ResponseEntity<SuccessDto>putProfessor(@RequestParam Long professorId,@RequestBody RegisterProfessorDto registerProfessorDto,Authentication authentication)
     {
         professorService.putProfessor(professorId,registerProfessorDto,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

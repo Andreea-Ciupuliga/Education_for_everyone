@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +20,7 @@ public interface StudentsBorrowBooksRepository  extends JpaRepository<StudentsBo
 
     @Query(value = "SELECT title FROM students_borrow_books where student_id=:studentId", nativeQuery = true)
     List<String> findTitleByStudentId(@Param("studentId") Long studentId);
+
+    @Query("SELECT  b.book.id FROM StudentsBorrowBooks b WHERE b.student.id=:studentId")
+    ArrayList<Long> findBookIdByStudentId (@Param("studentId") Long studentId);
 }

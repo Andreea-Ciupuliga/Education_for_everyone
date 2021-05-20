@@ -33,7 +33,6 @@ public class HomeworkService {
         homeworkRepository.save(newHomework);
     }
 
-
     @SneakyThrows
     public void removeHomework(Long homeworkId)
     {
@@ -41,13 +40,10 @@ public class HomeworkService {
         homeworkRepository.delete(homework);
     }
 
-
     @SneakyThrows
     public Homework getHomework(Long homeworkId)
     {
-
         Homework homework = homeworkRepository.findById(homeworkId).orElseThrow(()->new HomeworkNotFoundException("Homework not found"));
-
         return homework;
     }
 
@@ -57,18 +53,16 @@ public class HomeworkService {
     {
         Homework homework = homeworkRepository.findById(homeworkId).orElseThrow(()->new HomeworkNotFoundException("Homework not found"));
 
-
         if(newHomework.getDeadline()!=null)
             homework.setDeadline(newHomework.getDeadline());
 
-        if(newHomework.getGrade()!=null)
-            homework.setGrade(newHomework.getGrade());
+        if(newHomework.getTask()!=null)
+            homework.setTask(newHomework.getTask());
 
         if(newHomework.getPoints()!=null)
             homework.setPoints(newHomework.getPoints());
 
         homeworkRepository.save( homework);
-
 
     }
 }

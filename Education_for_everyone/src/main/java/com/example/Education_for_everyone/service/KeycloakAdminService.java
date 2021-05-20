@@ -19,11 +19,11 @@ import java.util.Collections;
 public class KeycloakAdminService {
 
     @Value("${keycloak.realm}")
-    private String keycloakRealm; /* aici este vorba de realm-ul pe care vreau sa il manageruies, in cazul nostru e java-labs.
-    Ne folosim de @Value("${keycloak.realm}") ca sa luam numele realmului (java-labs) din application.yml */
+    private String keycloakRealm; /* aici este vorba de realm-ul pe care vreau sa il manageruies, in cazul nostru e education_for_everyone.
+    Ne folosim de @Value("${keycloak.realm}") ca sa luam numele realmului (education_for_everyone) din application.yml */
 
     private final Keycloak keycloak; //obiectul asta nu e un Bean, ceva ce poate fi injectat prin @Autowired asa ca trebuie sa creez eu un Bean de tipul Keycloak
-    private RealmResource realmResource; /*pentru operatiile pe care vrem sa le facem de ex de salvare. Pe asta nu il po initializa
+    private RealmResource realmResource; /*pentru operatiile pe care vrem sa le facem de ex de salvare. Pe asta nu il pot initializa
     in constructor ptc am nevoie de obiectul de tip Keycloak ca sa pot sa il initializez pe realmResource asa ca il initializez intr-o
     metoda pe care o notez cu @PostConstruct */
 
@@ -58,7 +58,7 @@ public class KeycloakAdminService {
         UserResource userResource = realmResource.users().get(keycloakUserId); //ne luam user-ul proaspat salvat din realmResource dupa id. Metoda ni-l returneaza sub forma UserResource
 
         RoleRepresentation roleRepresentation = realmResource.roles().get(role).toRepresentation(); /*pe roleRepresentation o sa
-        il initializez cu rolul pe care il iau direct din realm pe baza numelui rolului. Numele e ROLE_USER de exemplu. Nu am nevoie de tot
+        il initializez cu rolul pe care il iau direct din realm pe baza numelui rolului. Numele e ROLE_PROFESSOR de exemplu. Nu am nevoie de tot
         obiectul de tip role pe care keycloak il tine salvat , doar numele lui */
 
         userResource.roles().realmLevel().add(Collections.singletonList(roleRepresentation));

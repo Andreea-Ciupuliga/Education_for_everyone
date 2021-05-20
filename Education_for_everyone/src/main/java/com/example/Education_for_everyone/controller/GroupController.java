@@ -40,7 +40,6 @@ public class GroupController {
     public ResponseEntity<SuccessDto> registerGroup(@RequestBody RegisterGroupDto registerGroupDto,Authentication authentication)
     {
         groupService.registerGroup(registerGroupDto,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -51,7 +50,6 @@ public class GroupController {
     {
 
         groupService.removeGroup(groupId,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -71,7 +69,6 @@ public class GroupController {
     public  ResponseEntity<SuccessDto> putGroup(@RequestParam Long groupId,@RequestBody RegisterGroupDto registerGroupDto,Authentication authentication)
     {
         groupService.putGroup(groupId,registerGroupDto,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

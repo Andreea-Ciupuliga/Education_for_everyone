@@ -33,7 +33,7 @@ public class HomeworkController {
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
+    @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @GetMapping()
     @SneakyThrows
     public ResponseEntity<Homework>getHomework(@RequestParam Long homeworkId)

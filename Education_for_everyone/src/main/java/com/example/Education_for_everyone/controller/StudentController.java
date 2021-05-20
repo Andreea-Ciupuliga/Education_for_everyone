@@ -33,12 +33,12 @@ public class StudentController {
 
     }
 
+
     @PostMapping("/register")
     @SneakyThrows
     public ResponseEntity<SuccessDto>registerStudent(@RequestBody RegisterStudentDto registerStudentDto)
     {
         studentService.registerStudent(registerStudentDto);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -48,25 +48,24 @@ public class StudentController {
     public ResponseEntity<SuccessDto>removeStudent(@RequestParam Long studentId, Authentication authentication)
     {
         studentService.removeStudent(studentId, Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
-//    @DeleteMapping("/all")
-//    @SneakyThrows
-//    public ResponseEntity<SuccessDto>removeAllStudents()
-//    {
-//        studentService.removeAllStudents();
-//
-//        return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/all")
+    @SneakyThrows
+    public ResponseEntity<SuccessDto>removeAllStudents()
+    {
+        studentService.removeAllStudents();
+
+        return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
+    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping()
     @SneakyThrows
     public ResponseEntity<GetStudentDto>getStudent(@RequestParam Long studentId)
     {
-
         return new ResponseEntity<>(studentService.getStudent(studentId), HttpStatus.OK);
     }
 
@@ -76,10 +75,10 @@ public class StudentController {
     public ResponseEntity<SuccessDto>putStudent(@RequestParam Long studentId,@RequestBody RegisterStudentDto registerStudentDto,Authentication authentication)
     {
         studentService.putStudent(studentId,registerStudentDto,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
+    //afisam toti studentii
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping("/showStudents")
     public ResponseEntity<List<GetStudentDto>> getAllAllStudents() {

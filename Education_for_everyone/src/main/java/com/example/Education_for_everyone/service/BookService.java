@@ -31,11 +31,8 @@ public class BookService {
 
         if(bookRepository.findByTitle(registerBookDto.getTitle()).isPresent())
         {
-
             throw new BookAlreadyExistException("Book Already Exist");
-
         }
-
 
         Book book= Book.builder()
                 .title(registerBookDto.getTitle())
@@ -44,7 +41,6 @@ public class BookService {
                 .totalCopies(registerBookDto.getTotalCopies()).build();
 
         bookRepository.save(book);
-
     }
 
 
@@ -87,7 +83,6 @@ public class BookService {
             book.setTotalCopies(newRegisterBookDto.getTotalCopies());
 
         bookRepository.save(book);
-
 
     }
 

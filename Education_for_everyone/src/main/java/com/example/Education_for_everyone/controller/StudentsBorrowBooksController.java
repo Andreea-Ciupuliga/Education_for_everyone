@@ -30,7 +30,6 @@ public class StudentsBorrowBooksController {
     public ResponseEntity<SuccessDto> borrowBook(Authentication authentication, @RequestParam Long bookId)
     {
         studentsBorrowBooksService.borrowBook(Helper.getKeycloakUser(authentication),bookId);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -40,7 +39,6 @@ public class StudentsBorrowBooksController {
     public ResponseEntity<SuccessDto> deleteBookFromStudent(Authentication authentication,@RequestParam Long bookId)
     {
         studentsBorrowBooksService.removeBookFromStudent(Helper.getKeycloakUser(authentication),bookId);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

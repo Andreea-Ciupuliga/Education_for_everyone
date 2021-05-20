@@ -30,21 +30,19 @@ public class ProfessorService {
     }
 
 
-
-
     @SneakyThrows
     public void registerProfessor(RegisterProfessorDto registerProfessorDto)
     {
 
         if(professorRepository.findByUsername(registerProfessorDto.getUsername()).isPresent())
         {
-
-            throw new UserAlreadyExistException("Professor Already Exist");
-
+            throw new UserAlreadyExistException("Username Already Exist");
         }
 
-        String body="Hello "+registerProfessorDto.getFirstName()+" "+registerProfessorDto.getLastName()+" you registered with your username: "+registerProfessorDto.getUsername();
-        sendEmailService.sendEmail(registerProfessorDto.getEmail(),body,"Inregistrare");
+        if(professorRepository.findByEmail(registerProfessorDto.getEmail()).isPresent())
+        {
+            throw new UserAlreadyExistException("Email Already Exist");
+        }
 
         Professor professor= Professor.builder()
                 .firstName(registerProfessorDto.getFirstName())
@@ -56,8 +54,12 @@ public class ProfessorService {
 
         professorRepository.save(professor);
 
+        //trimitem mail ca s-a inregistrat
+        String body="Hello "+registerProfessorDto.getFirstName()+" "+registerProfessorDto.getLastName()+" you registered with your username: "+registerProfessorDto.getUsername();
+        sendEmailService.sendEmail(registerProfessorDto.getEmail(),body,"Inregistrare");
+
+        //specificam direct ROLE_PROFESSOR ptc nu vrem ca cine inregistreaza din postman sa poata decide ce rol sa aiba
         keycloakAdminService.registerUser(registerProfessorDto.getUsername(),registerProfessorDto.getPassword(), "ROLE_PROFESSOR");
-        //specificam direct ROLE_STUDENT ptc nu vrem ca cine inregistreaza din postman sa poata decide ce rol sa aiba
 
     }
 
@@ -66,6 +68,7 @@ public class ProfessorService {
     {
         Professor professor = professorRepository.findById(professorId).orElseThrow(()->new UserNotFoundException("professor not found"));
 
+        //daca este admin sau este chiar profesorul
         if(username.equals("admin") || username.equals(professor.getUsername()))
             professorRepository.delete(professor);
 
@@ -145,4 +148,8 @@ public class ProfessorService {
         return professorRepository.findAllProfessorsByName(professorName);
     }
 
+    @SneakyThrows
+    public void removeAllProfessors() {
+        professorRepository.deleteAll();
+    }
 }

@@ -27,10 +27,10 @@ public class StudentsBorrowBooksService {
     @SneakyThrows
     public void borrowBook(String username,Long bookId)
     {
-
         Student student = studentRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("student not found"));
         Book book = bookRepository.findById(bookId).orElseThrow(()->new BookNotFoundException("book not found"));
 
+        //daca gasim perechea studentId si bookId inseamna ca are inchiriata cartea asta
         if(studentsBorrowBooksRepository.findBystudentIdAndbookId(student.getId(),bookId).isPresent())
         {
             throw new UserAlreadyExistException("student has already borrowed this book");
@@ -61,6 +61,8 @@ public class StudentsBorrowBooksService {
         Student student = studentRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("student not found"));
 
         Book book = bookRepository.findById(bookId).orElseThrow(()->new BookNotFoundException("book not found"));
+
+        //verificam ca exista perechea studentId si bookId
         StudentsBorrowBooks studentsBorrowBooks=studentsBorrowBooksRepository.findBystudentIdAndbookId(student.getId(),bookId).orElseThrow(()->new BookAndStudentDoNotMatchException("Book And Student Do Not Match"));
 
         studentsBorrowBooksRepository.delete(studentsBorrowBooks);
@@ -70,6 +72,7 @@ public class StudentsBorrowBooksService {
 
     }
 
+    //aratam toate cartile inchiriate de un student
     @SneakyThrows
     public List<String> booksBorrowedByStudent(Long studentId) {
 
@@ -79,9 +82,6 @@ public class StudentsBorrowBooksService {
         }
 
         return studentsBorrowBooksRepository.findTitleByStudentId(studentId);
-
     }
-
-
 
 }

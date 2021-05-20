@@ -15,6 +15,7 @@ spring:
       ddl-auto: update
   # Hibernate ddl auto (create, create-drop, validate, update)
 
+
   mail:
     host: smtp.gmail.com
     port: 587
