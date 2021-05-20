@@ -28,14 +28,15 @@ public class GroupService {
     @SneakyThrows
     public void registerGroup(RegisterGroupDto registerGroupDto,String username)
     {
-        //Cautam profesorul care vrea sa faca grupul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
-        Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
 
         //verificam daca exista deja un grup cu numele asta
         if(groupRepository.findByGroupName(registerGroupDto.getGroupName()).isPresent())
         {
             throw new GroupAlreadyExistException("Group Already Exist");
         }
+
+        //Cautam profesorul care vrea sa faca grupul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
+        Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
 
         Group group = Group.builder()
                 .professor(Professor.builder().id(professor.getId()).build()) //id ul profesorului o sa il dam automat de la profesorul gasit dupa username
@@ -84,7 +85,7 @@ public class GroupService {
         //verificam daca exista grupul cu id-ul respectiv
         Group group = groupRepository.findById(groupId).orElseThrow(()->new GroupNotFoundException("group not found"));
 
-        GetGroupDto getGrouptDto=  GetGroupDto.builder()
+        GetGroupDto getGrouptDto=GetGroupDto.builder()
                 .groupName(group.getGroupName())
                 .subject(group.getSubject())
                 .yearOfStudy(group.getYearOfStudy())
