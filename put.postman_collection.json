@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "438825c2-80e9-45b0-b398-23a3b11e7be2",
+		"name": "put",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "editare grup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTcyMjUsImlhdCI6MTYyMTQxNjkyNSwianRpIjoiMDFiNzhmMGMtYjYyZS00YWM1LWJkYmQtMmEwMjg0NDQ5NTBjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNTljOWQ2NWMtY2JiMi00ZTE0LTgwODYtNjg0MzA4NTgwNjVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMzg2ZjY4NDMtMjYxMi00NzJhLTk1ZWItMTVjNjQ2NDdjNDdmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImVsdnkifQ.mTSNJraNY2ofZLIGV2vlIskjQeiQjBgn7invJagdfggCOmqfkJGLKFzSIJSh23nrP2ZJXDphFNdhIFWQsjQh0FOisf8kNyqoeCzOFX5R7D3E9YmI6w7Yw9P9efTBaA0XPnevPb5XFFhqltsnuKp26G4Bj9nX9YO_a3qLJvelkuqztNUrDiL9CZTfL7zQcoe-kgFDH6rL8-DGD0dmEElZOYjZpl7xz9hMcmRkKqazQ9oqKQXjxcYAmb0b34eJ9oz_gqVrxze9ApXYePCX1RCeFpUmt-TH5YO14GRT3mEIZx9sLr2M0OjGSTkzF_ISVUkQdxXBpOkwGmn49d1v7IfZuQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"groupName\": \"gramatica limbii romane(editat)\",\r\n    \"subject\": \"romana\",\r\n    \"yearOfStudy\":\"cls a 5 a\",\r\n    \"totalSeats\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/group?groupId=11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"group"
+					],
+					"query": [
+						{
+							"key": "groupId",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editare carte",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTkzMjQsImlhdCI6MTYyMTQxOTAyNCwianRpIjoiMjg1OTk0ZjEtZTE4YS00ZjNjLWIyNjAtMjk4OTIyYmZlNjQ4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMGU5MDgzNjgtM2NlOS00M2EzLTk2OWEtYTE3NTFjYjE5NjIxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.vFR5MqCZ27-FM1bO9_is2-4BVXwHdxBwY9lptrpTDewqONh6gn0VVXDxCcGf1NT5guA_WbcaJc_2q3h3WOsizIuH_besMNNJIgCs0dCwJOigULezblbFJ1avFz_IgTVej8cqJQcGhJkCrZJJ0dz4hs37pPXB9YDTo6Q77GHaKHjRyiQyYt-j8lqA4iFpxr4EkKGRJVfVhGDMu4vfLXubE5dW1MmXJij2rN7HEKwabqS9cLOCXKqAohLuH938veL7sTqKqC8IcVVYg0K_jU84Fs0vxIjRo4VZrLmsyZH18kdQOfhK083qAwiFwM7kmuZ53dXWBaFDI3fsk3j1OMIkWQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Amintiri din copilarie (editat)\",\r\n    \"author\": \"Ion Creanga\",\r\n    \"totalCopies\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/book?bookId=6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"book"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editare profesor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NDQ3NDksImlhdCI6MTYyMTQ0NDQ0OSwianRpIjoiYTIzNzNhZWEtMmI4Ni00MzZhLWI2ZjAtM2M3NjdkMzIyOTNlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmIyZDA0NjEtMGNiNy00YzJiLTk4YTYtNDY0MzBkZTRiNjc0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMzA5MjAwMjgtZWI3OS00MWU3LWE3ZTktOWM4ZDEwZDNlZDZkIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.nWFlALqOzlhkqNU8xlQEgALuRqeSYgXlZpbj6WLJjiXLBavb9kYudC7PqP7F8ScX8BvN6SJHMuMkqaneqhBHqvCqK26b7frZ9MKFEWCBK9Dw0RAnCqg07ECLu9dGvq1PvjfjtQc9_wzy7PAkeW2Y7PKylQv-n_Fzou0HhpD07mnRqVxuAhkwZvLvXlm6U_EqvRCHS8aHIlFx6JSYqhzEnPaHpYgbGhAK9SissxwTy1LaNWwH20On1WAORo7NDhSLn3mOoNQN0bqIUViupu32ZfW6uEf7zBDseYG_IQIf4bGyhFdxyRRhx5uURUQ3rNpdgKGrNW7lVIo79Yg7rADNPg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"prof(editat)\",\r\n    \"lastName\": \"unu\",\r\n    \"email\":\"prof@email.com\",\r\n    \"username\":\"profesor\",\r\n    \"password\":\"123\",\r\n    \"subject\":\"romana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/professor?professorId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"professor"
+					],
+					"query": [
+						{
+							"key": "professorId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editare tema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1MDg3NTcsImlhdCI6MTYyMTUwODQ1NywianRpIjoiMTliNTQwYmQtNzdlNy00MDA1LTllNzktZWI2ODk3NWMwMjQ5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmVhYTc3NzctOWFjNi00NGQ4LTg0MDYtMDA3MDFjYmJlNTQ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOWQ4ZjU4ZWYtZjg2Zi00YjE5LTk0YjEtYmIwODgyMGVlYWZmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.ZDesqQEUm6UZll93crQttVkfrziRL3aCdOiJz102aL-NAEvDpFp-OtLAEErhWiSqN68ssk1nIb_Q2Weo-ogABhS5VA8nfbFyr1rDe_8b6kwXaqXdPqv3vBxxMSMKPlhB_GW3A33SsOq_2VUjj5PjD1lCAWYYuj7DTFCBnWFnO7SOx8MwYf8E8-YZYDqf29pc7zQZmGz2SzbSUNaE-Zk4JBOtkVQO0FectXUAQtI2GSoadTASCgwOmBS5JASW663Lx7dWKk8l7LF5Z0_PNy3GYZ-NW8PhjBTGZKqPpneFyM1ZDYrppWwlxabilQCXPiGLEX_Xx06EwUA-kOIYh7XXLQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task\":\"pagina 20 exercitiul 2 (editata)\",\r\n    \"deadline\":\"peste 2 saptamani\",\r\n    \"points\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/homework?homeworkId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"homework"
+					],
+					"query": [
+						{
+							"key": "homeworkId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editare student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1OTI2NzAsImlhdCI6MTYyMTU5MjM3MCwianRpIjoiMjdkMDMwNDYtODI3OS00NGY3LWI0ZmUtN2MwZjJlZDdkMTU5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZjE0NTQ5ZGQtNWUxZC00NjIwLWEzNmEtODcyZTQzMDU4MDRmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.IMuXSvtDHBA51KGD8vakHW1bLNmsYNvKDs75SkZdWtj5Q46ijusufyJaQi16u207DCSIY0hxpDjwb9AJTdU5PQ-taGHyyxd4_zgT-fkksiiDFn6INhCEe1e-Kol1WHn3qIODfpmmjYOqjXsEUzSw-Hj5Ff1LkUIz4oXCq1v78eU4zCL6oL672HCTqV1PDB9hMIfF9MiAuwylZO1yO_sgFPk6OC_U3fqPDuec2SWXPiEpaWZm6OBRJ4Az8l7RU4AFkLZQ2Id8Ql3MuRUuBTPonMV-rGj0hiNgrUf2kUHVAOWpTQDYU2XbVXvWwjznp88ULVxaqEPuc1OMgG8KcOcR9A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"test@email.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/student?studentId=7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"student"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
