@@ -1,10 +1,6 @@
 package com.example.Education_for_everyone.controller;
-
-
 import com.example.Education_for_everyone.dtos.GetBookDto;
 import com.example.Education_for_everyone.dtos.RegisterBookDto;
-import com.example.Education_for_everyone.models.Book;
-import com.example.Education_for_everyone.models.Group;
 import com.example.Education_for_everyone.service.BookService;
 import com.example.Education_for_everyone.utils.SuccessDto;
 import lombok.SneakyThrows;
@@ -13,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/book")

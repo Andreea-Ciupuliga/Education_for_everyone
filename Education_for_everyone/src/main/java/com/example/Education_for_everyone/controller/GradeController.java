@@ -1,11 +1,7 @@
 package com.example.Education_for_everyone.controller;
-
-
-import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.service.GradeService;
 import com.example.Education_for_everyone.utils.Helper;
 import com.example.Education_for_everyone.utils.SuccessDto;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
