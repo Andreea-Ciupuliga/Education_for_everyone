@@ -1,11 +1,7 @@
 package com.example.Education_for_everyone.controller;
-
 import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.RegisterGroupDto;
-import com.example.Education_for_everyone.models.Group;
-import com.example.Education_for_everyone.models.Professor;
 import com.example.Education_for_everyone.service.GroupService;
-import com.example.Education_for_everyone.service.ProfessorService;
 import com.example.Education_for_everyone.utils.Helper;
 import com.example.Education_for_everyone.utils.SuccessDto;
 import lombok.SneakyThrows;
@@ -24,9 +20,7 @@ import java.util.List;
 @RequestMapping("/group")
 public class GroupController {
 
-
     private GroupService groupService;
-
 
     @Autowired
     public GroupController(GroupService groupService) {
