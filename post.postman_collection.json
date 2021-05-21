@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "f30dabb5-bc59-4bfe-accc-58f62f3899ce",
+		"name": "post",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "inregistrare profesor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"profesor\",\r\n    \"lastName\": \"profesor\",\r\n    \"email\":\"profesor@email.com\",\r\n    \"username\":\"profesor\",\r\n    \"password\":\"123\",\r\n    \"subject\":\"romana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/professor/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"professor",
+						"register"
+					]
+				},
+				"description": "inregistrare profesor"
+			},
+			"response": []
+		},
+		{
+			"name": "inregistrare student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"test\",\r\n    \"lastName\": \"test\",\r\n    \"email\":\"test@email.com\",\r\n    \"username\":\"test\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/student/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"student",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inregistrare(adaugare) carte",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTkzMjQsImlhdCI6MTYyMTQxOTAyNCwianRpIjoiMjg1OTk0ZjEtZTE4YS00ZjNjLWIyNjAtMjk4OTIyYmZlNjQ4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMGU5MDgzNjgtM2NlOS00M2EzLTk2OWEtYTE3NTFjYjE5NjIxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.vFR5MqCZ27-FM1bO9_is2-4BVXwHdxBwY9lptrpTDewqONh6gn0VVXDxCcGf1NT5guA_WbcaJc_2q3h3WOsizIuH_besMNNJIgCs0dCwJOigULezblbFJ1avFz_IgTVej8cqJQcGhJkCrZJJ0dz4hs37pPXB9YDTo6Q77GHaKHjRyiQyYt-j8lqA4iFpxr4EkKGRJVfVhGDMu4vfLXubE5dW1MmXJij2rN7HEKwabqS9cLOCXKqAohLuH938veL7sTqKqC8IcVVYg0K_jU84Fs0vxIjRo4VZrLmsyZH18kdQOfhK083qAwiFwM7kmuZ53dXWBaFDI3fsk3j1OMIkWQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Amintiri din copilarie\",\r\n    \"author\": \"Ion Creanga\",\r\n    \"totalCopies\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/book/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"book",
+						"register"
+					]
+				},
+				"description": "inregistrare carte"
+			},
+			"response": []
+		},
+		{
+			"name": "inregistrare(adaugare) grup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTcyMjUsImlhdCI6MTYyMTQxNjkyNSwianRpIjoiMDFiNzhmMGMtYjYyZS00YWM1LWJkYmQtMmEwMjg0NDQ5NTBjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNTljOWQ2NWMtY2JiMi00ZTE0LTgwODYtNjg0MzA4NTgwNjVmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMzg2ZjY4NDMtMjYxMi00NzJhLTk1ZWItMTVjNjQ2NDdjNDdmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImVsdnkifQ.mTSNJraNY2ofZLIGV2vlIskjQeiQjBgn7invJagdfggCOmqfkJGLKFzSIJSh23nrP2ZJXDphFNdhIFWQsjQh0FOisf8kNyqoeCzOFX5R7D3E9YmI6w7Yw9P9efTBaA0XPnevPb5XFFhqltsnuKp26G4Bj9nX9YO_a3qLJvelkuqztNUrDiL9CZTfL7zQcoe-kgFDH6rL8-DGD0dmEElZOYjZpl7xz9hMcmRkKqazQ9oqKQXjxcYAmb0b34eJ9oz_gqVrxze9ApXYePCX1RCeFpUmt-TH5YO14GRT3mEIZx9sLr2M0OjGSTkzF_ISVUkQdxXBpOkwGmn49d1v7IfZuQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"groupName\": \"gramatica limbii romane\",\r\n    \"subject\": \"romana\",\r\n    \"yearOfStudy\":\"cls a 5 a\",\r\n    \"totalSeats\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/group/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"group",
+						"register"
+					]
+				},
+				"description": "inregistrare grup"
+			},
+			"response": []
+		},
+		{
+			"name": "inregistrare(adaugare) tema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1MDk4ODQsImlhdCI6MTYyMTUwOTU4NCwianRpIjoiMGI4MzVkZWYtNGNmZC00ZmY2LTlhNTktNDU5MGEzYzc3MjJjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmVhYTc3NzctOWFjNi00NGQ4LTg0MDYtMDA3MDFjYmJlNTQ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNzFhNzQ5YjgtYmEwOS00NDNkLTkxZGMtZjE0OGNjYTMzNWJiIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.xITyYm0kf295ioCzTT1EwXEJif1RbU83b11euEvF_RUHa5I2VxKwaZyfucom6g9zXtdFcorhx6LnlaoXdcX1cdimBitTwuWdY9zErqgLfNw296FsThP4FlZ9sjTLtcN1hHhkGiNc8aZDrrN34Ju-yCc4X-4QI207ROZej9K_7CVoFmtXRFaxKHQvbqcFIvqkMCJI1qaXYJlJB-EYryDGt1sZf0bkl7XMPNpEMaS7iHGMPylq9xQU5kWsQIzNf98xGb8z7_yIPGBADIg7-wqds9WYw32l--XhWKlKtzIV2tfj1TFQkXttndvvCwEXeLR1EXqIs5EDWugORJtWN3n5TA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task\":\"eseu argumentativ\",\r\n    \"deadline\":\"peste 5 zile\",\r\n    \"points\":20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/homework/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"homework",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adauga elevi in grupuri",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MjMwMTcsImlhdCI6MTYyMTQyMjcxNywianRpIjoiNTkxMzhhNzctYWQxYS00YzhjLWEzM2EtY2RjY2FjZGM5NjUxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmIyZDA0NjEtMGNiNy00YzJiLTk4YTYtNDY0MzBkZTRiNjc0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZDExZDFjZGItYTllOC00NmMxLTk5NzEtNmEyZDdmOTZlNDFhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.CwRGJAg4k6ydh33c7ggNijsgLwnTJ08Qa2uazLwGJ5m8PMyPX-VjClOqdlH6LS-6YEkKH0H0E4WWcLKhafp8ntJGGedYY1BxGLTSyRL8A9zG9hX4Ak40xcOYHNKYEq0GnabmiZsIjp8UKmS5O33njyteNDFVSB5Uu_BBf0J6XYGB-vEKjTLmJyJHOP8ftnyyT_s5kLHE0JbSdWSrTbLx4z_PbucIsjZT19uunpM1hVqTOrMlYUHgM7E504Jq1AxXzalLEE64iC1w1XWIXY2vAIupaGuOrSrZGj20bHNdTWJ76iP0LcO_ota78JOKekVWSJLiM_i4bW5PT91YOZYITQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/groupOfStudents/register/?studentId=8&groupId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"groupOfStudents",
+						"register",
+						""
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "8"
+						},
+						{
+							"key": "groupId",
+							"value": "3"
+						}
+					]
+				},
+				"description": "inscriere student in grup"
+			},
+			"response": []
+		},
+		{
+			"name": "asignare tema unui student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1MDkxNDgsImlhdCI6MTYyMTUwODg0OCwianRpIjoiODc2YjI3NGQtMzhiNi00ZGQ0LWEzMjItZmRhZDQ0YWU0YjA0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmVhYTc3NzctOWFjNi00NGQ4LTg0MDYtMDA3MDFjYmJlNTQ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNWM2NTM3N2EtOTkwMy00YThiLWI5NGYtOGY2ZGQxNGU1YWQxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.TkfTpAu6ueeVLVyNBGghtVhGKl7mFVyi0ypMmQ7r9X7Cgqo2-8kGDakCLnxR6oFyWJqm2FUIq_58i4RQsruDnLK6cgQHlZan76wWXUI0oCgvz6WymzF6RaBP2BTT6OzHu1iSDq0n1H6P5yOvJUo3NOdZ_xS98_GqwGs3YeXOJ1yowSf5DDcVyke42lyN-Vwojhb4_aC_ivcrfBef2bU1y6r9Ip6RUEBjJXxfXG5iHVa_CD4nm9vVSaqQ2KgJVrEskKz6wt4qLqiZfwK0WObX5Y4uF_wydJftIrh_rMI5WCoDNgvAqYueG-XoSfMrtpCWYztbQ5eK0iDNOHcsXAJ5gQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/grade/assignHomework?studentId=7&homeworkId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"grade",
+						"assignHomework"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "7"
+						},
+						{
+							"key": "homeworkId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "asignare scor pt o tema rezolvata de un student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1MDk0NzEsImlhdCI6MTYyMTUwOTE3MSwianRpIjoiYjg4NzgwM2MtMDk4My00NDNkLWJmM2EtYzk0MzY5ZGJlOGMyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmVhYTc3NzctOWFjNi00NGQ4LTg0MDYtMDA3MDFjYmJlNTQ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOGE0OTI1YTQtMWZkNS00NDQ3LWE3N2EtNmFkZWZiNjdmYWU5IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.tlMrD0AfvHD6-ulmR6Ug6wpQJg1grWXd2w0GFr5um6dJPfympNr5yPAiVJU_jGc_pyCanHxm3uQaWamGzybHIX0-xvh_VmYOZVJq06frY0XecasOyHu9C8QHnu_KzBihI2SpP2vkxSZLqFeM0mr2tVsL9KotZnA8S0gPxq6kxn6wZJ2FfL8icHqaN7LtdJMsOYj_sAt6ER52ufpaP0OwcVR4DfxtG_fiKr_zcAGAg2qDQOkAzTBxKY_2yCDuTMnYmEJLA2HpywarqGnKNu-tBjbL90fKDsDJO8wgGx2Ku7WuFMAlOsA86tf0r1_kivDqWXMAZeKwUIF7iFgJuFhSgw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/grade/assignScore?studentId=9&homeworkId=2&score=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"grade",
+						"assignScore"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "9"
+						},
+						{
+							"key": "homeworkId",
+							"value": "2"
+						},
+						{
+							"key": "score",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "imprumuta carte de catre student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NDU3ODIsImlhdCI6MTYyMTQ0NTQ4MiwianRpIjoiMGI3ZDM4OTktOTI4My00MDNkLTlmMzMtNzY1MjExYzcxNTU2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYWY1Y2MyZDQtZGNjYy00NGZmLTkxNmYtYjY4MTlkY2I4ZDgyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNDFlZjdkNTMtNDUyZC00ZWI1LWJlM2MtYmU5ZmMwOTZkNTc5IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJST0xFX1NUVURFTlQiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzdHVkZW50In0.RxvFy1cx2MuLWN8KdhMRDQsVro62XPED-JoUi7E1xJ-7toFYo_brcTDjOtESkCsuNnQOn2RBek0zm_ON69dLK6kYhikBAwtoNBCXzUfcsfElmetJIlXafeV_04WqI8ZFsx6ApnNhexD2EzHIz4g3TVXWnudV38bhHzKwe41b6ud3MDW4B28FRmwDkiXOHexZdMMwNnzVgYvXs19ZOx1WV9RpUUmLKWkBs0igcyTUMyO9G2g5Dvsm0ZnOCDZ1PZhAe00wK-87N-abNChz0pJPjEXNbTYfB9aJnoGljjuM0-9ZQp707oPmjoyPuDmaWTyXjBYvo3JLXysBiGleSGQsWA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/studentsBorrowBooks/register?bookId=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"studentsBorrowBooks",
+						"register"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

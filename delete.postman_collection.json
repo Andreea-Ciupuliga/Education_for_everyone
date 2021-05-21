@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "8f3ba91f-90a2-484f-82bc-a2f43b7b2d9d",
+		"name": "delete",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sterge student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MjEyMTMsImlhdCI6MTYyMTQyMDkxMywianRpIjoiNDQyNmE2N2EtYTQwNi00MDk3LWIwNTItM2JkNzRiYTgzMmFjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiY2RiNzk1OGUtNDg4Mi00MTZhLTlhOWEtYmVlMjY2MDRhZGZlIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.ldo8iOP_tSNuZLGDmPINZyF5VaK2NfW_STxAGrlWAee4fhoQ63gB_OvJbu1AzQ1IaKuua-Wk-ODHIvCFJMkt1K4wj0D0MY9caXkC4x9Nfz7GTjtof_jL5qdeFieIvHjZ4BjnDbcNd-zes53cc22QW-AxadoZ5aE0dU-UfVOiUazlp3IqVaifMxEYMT_BcYIx8Pq5BidWKgvjg53WlecViB6ehEzFFIxH7yx76HU8JQXjvxFmWXkxBBcYyH_ZwqRO01uUYKv8lJr3FLpZlfkOQH6GyHdawbRyjiJ4sSrfB99-mO0Alh1kw_62zw-oI9R8963ErsMosxrhXaRzVHHIwg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/student?studentId=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"student"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stergere profesor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjA4Mzc1MjIsImlhdCI6MTYyMDgzNzIyMiwianRpIjoiZTQxYTY3YzgtNTkwMC00NzFiLThhZGEtM2VkMTFkMWRkZDM0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiYjViZWRjNjEtZGMyZC00ODE4LWI5NDAtNWU3MGFiZTYyZjkxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.JbzljuHDxHr_WPqZPbMTmteLtb77TQQ-qiAwuLxK5A-byXSy9-3WTsm6Y1xC2zOwyflL4T0yQkN5CzW1co-i-3kjwM_DFasdAESfKUwCpOF1Ts1riicZJmniHxT56UCijOhXcQZx-0NGuKDCiog4LSz_f6rtQgCI1f3GV6KHIFzM5vy6CvnXIAdidNvayiLfgdUgP0uDIFw3O-r__hOAAU-FPVSLrT1OF1iDubSHdwBk_ArIoXaGSeL8yVdIcO6A3MFOWsL63o9EjcqjmZewavmxQLtAOMHfztB-r0M8UM-WDUc_qwYlEwepQAWWZAmINux4lGkFpXxXnfpr0rPbNA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/professor/?professorId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"professor",
+						""
+					],
+					"query": [
+						{
+							"key": "professorId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stergere grup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTcxNTQsImlhdCI6MTYyMTQxNjg1NCwianRpIjoiNjdkYzczYmItZjZkMS00MzFkLWI3ZmUtMjM4ZDBjNmNiNDBkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZDcwZjljNzYtNmRhYi00ODA1LWJiOGYtNzY4ODkyOTlmMmRkIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.v25Vrh2R7-9FPcwCLmAhImbjEDOObjkp8H3w-H5CeLvx9B4tKZsFAwwVEMN7YkI0-j1vSLiqlS2KpMDNCQF5A9KlAeHlHFykMU5PXn6yvIAbWmsgsISkD8aGcxTrKq-iRNdR3kPE7cMBNHzk92rvzuKk2gPEwR_WdxtMpdjHEf3WhDF8vip9uWlZTQPCdJI4vu3clGAUPXNTpfjeaBOsLgLsVGFwldONc2jYYIqRxqV4m5gzLzlhydnnXYBh9GMn2XNwxAoHLUVfxz2ZOSGgHE1yPf435jyxoPAx4--PDgX0PtfW15aQxbfjVcXTb3dNdxwxBF9DlwKGfy5st8Dv_w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/group?groupId=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"group"
+					],
+					"query": [
+						{
+							"key": "groupId",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stergere tema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjA5MTY4NTMsImlhdCI6MTYyMDkxNjU1MywianRpIjoiYTBhMjEzYTQtNzIzOC00YWQxLTllOGYtMDYzNjAwMmQyMzk1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNmUwZWI0MjgtODY0Ny00YTYxLThiYjQtNWJlMWYxZGE1YmJkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiNjFmZjkzYjAtYTFiMS00ZmQyLThjMTAtMTNmYjJkZWMzZjMxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.I7rr7IpGvy_CNr7YSYmji126CvYViH9b84D9CzIDSUlZumbEpuwRmarewv_kk8iSPYKb7DIaxOSFlyyKZBwnDx4zVyR35Xiby-mEs4xe6mbDe0Dvs7uwCJP2C-st2T2BE9nsO2VPcVvnYpAcUrn-LK07PQ--XSQMLf2nFcrahBNogniUR_IfxvYd-Px-Niuqaz26_yE7BMVrhYEFw2hHFla0hyutUYQNgkCLxzKSwqkfAbhanRefOgpDy2pbJZFUSMLR06qxIOvEckzhYBCnOwtLPOYn8HoBExSBZ90q_kn-3M_H4GsqKjCOaDyOEmLeylVcmfgzgfE1dz2x2Mw9OA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/homework/?homeworkId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"homework",
+						""
+					],
+					"query": [
+						{
+							"key": "homeworkId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stergere carte",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MTkzMjQsImlhdCI6MTYyMTQxOTAyNCwianRpIjoiMjg1OTk0ZjEtZTE4YS00ZjNjLWIyNjAtMjk4OTIyYmZlNjQ4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMGU5MDgzNjgtM2NlOS00M2EzLTk2OWEtYTE3NTFjYjE5NjIxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.vFR5MqCZ27-FM1bO9_is2-4BVXwHdxBwY9lptrpTDewqONh6gn0VVXDxCcGf1NT5guA_WbcaJc_2q3h3WOsizIuH_besMNNJIgCs0dCwJOigULezblbFJ1avFz_IgTVej8cqJQcGhJkCrZJJ0dz4hs37pPXB9YDTo6Q77GHaKHjRyiQyYt-j8lqA4iFpxr4EkKGRJVfVhGDMu4vfLXubE5dW1MmXJij2rN7HEKwabqS9cLOCXKqAohLuH938veL7sTqKqC8IcVVYg0K_jU84Fs0vxIjRo4VZrLmsyZH18kdQOfhK083qAwiFwM7kmuZ53dXWBaFDI3fsk3j1OMIkWQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/book?bookId=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"book"
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sterge student din grup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0MjI5MTMsImlhdCI6MTYyMTQyMjYxMywianRpIjoiODhiZTA2MGUtNjc5Zi00MDg1LWJhZWMtMWE0NzhjNDFlZWY1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYmIyZDA0NjEtMGNiNy00YzJiLTk4YTYtNDY0MzBkZTRiNjc0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZTVkZThiNDUtZmM5YS00ZTcyLWI0YzctNzI5Njg2ZWY5NTQyIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.gV-yYBzObTAbaWX4CVr6wNVtBgQ4XwqsGwIBniVaVCdU8s48pASIhyang_f66VBa8lzrr6ujLAfasMqPGDqagPgJCJ54CYpSA8l7X__mv0rPUxYPuud9HcIiRJkDM5fY68r3bQCRtyLPV3krz_NgCba-r0LDEuRFxodnLv_6h7Ba3-eZ1wae1s039uMTnrt2l4-7ROdGz9Kvjt5tqSfKFAu4_BmLbLqo05v64aevy-A-jV_Py7YXR9XgxrGmpUHYN0HLmSU26-KZPYMCJGghcKu3_xXaesHjXlDzd_6KOfnBAWwnj_ADMjd7I-MVjTwyjHOrHdWbF5Lrva7YPAvrDw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/groupOfStudents/?studentId=9&groupId=8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"groupOfStudents",
+						""
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "9"
+						},
+						{
+							"key": "groupId",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sterge student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NDU1NzIsImlhdCI6MTYyMTQ0NTI3MiwianRpIjoiM2JmZmY1YTEtMmY0MC00NDk1LWIwYTgtOWExZDRlYzMwMTc4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNWEwNmU3Y2ItYWI3MS00YmQyLWEzNGMtMzMwZmI1MTI0MGRlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiN2YwMDRmYTktODQwNC00ZWI2LWE0ZTQtNmY2YWVhMjVkODY1IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJST0xFX1NUVURFTlQiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJnZW9yZ2UifQ.ze2uoorCIn1oQoCHiyj27D4EpNM9GKLlrZkJuV-2b4LxxYFGRLPolxbwik9nMncYV4V5dupDY32dMXHL1W5ukIWnpc4RCyDMZ3KCWtNBptZkRjdWic1oHQ0yq3dlCC3N72ICkUkquGRRs38iMWdDRz520zLgtDNPSTECEmIkjOk5vOv_9mLLK6klERIeNzcBDdQDHTIyqdBXSHpxiWPO66reJ2-JbrRfqQde-lgxr58kLUdtltPoip6fadUbVnXfLwbNdliQTfaRXY484i-eOWM6KeB4nQssZNa_vhMvhEcBAfge9MFpEb5QuajVDqVqeF5K9kZeuF0tHGerBGdEPw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/student?studentId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"student"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "returneaza carte de catre student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NTA0MTAsImlhdCI6MTYyMTQ1MDExMCwianRpIjoiMmM0YmNjMWQtOTA2MC00NzdhLTk3MjEtYTcwZTM5ZmIwOTViIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiYzliZWIxMDctNmE5Yy00NDU5LTg2NjAtMDhiYWZjNjdiNzA2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiODM1MTA1NjYtMDMzMi00ZjY5LWFmZWItZGZlZTlmMTUxMzdmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJST0xFX1NUVURFTlQiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzdHVkZW50In0.Bvr2PmciOPICGfwUDYCea4uhUtaNn_n05gKV94BLG7NQEgv6GH-g7cPe234kkdLpMvfNxWEi0qVpsugWR6PrUMYduHF2IbjXAB7AnfRvYr-5Sfhda3uI6c5-PhT8c93gLHA9djtD4lUzB2y1h5DqOrNFOa_-h-AjFX5bQI1fmrVREWgza8NQ9I4nZHGxN_SIhG1AJxnZPeTfDvhK7sU2-r7A9XEtSNQz2SjSINptnxcajMT1-RwcKwLp8mBsPKu5OpbBthiNNcN2rA0QhaS8vhSZI40Q1rkJbsaAHPydMvcB42JeXb50cq7TMu-x2wenyQo-m6saCFfKwtMe0g23vQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/studentsBorrowBooks/?bookId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"studentsBorrowBooks",
+						""
+					],
+					"query": [
+						{
+							"key": "bookId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sterge toti profesorii",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NDc3ODIsImlhdCI6MTYyMTQ0NzQ4MiwianRpIjoiOTEzMzExM2EtNGY4NS00MTVhLWI4MGItMDM1ZmQzOTNiMGE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMzA5NTg1NDYtNDk3ZC00OTFjLWE2MjItNDFkYWVkMzk2M2QzIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.IvRT1DgDyZ1M9I2COZzGVFNyFD1R6IeBLOhtCozld4SitInXEHSYl4sf9X1tuavfb1HGGAo32RMJgK4GRC8ZievoZ85QlOqmr-ON9nkFHq_O9DVzhC7aPBGDFzTC5Vbh504DTSkourGwnhLAUIvkROFfRlEF4oaexpuwmK_pZOTAaHRJh3nRQ8Ncix6iTr55hxOEmg6Q7t1sw0aOlROlNkKS4hZTuzHNEh5AIfUCFTORYiSPWiX9AOYnVmeCMQnD4a5H467P1let1gCYjTkXSXW1szpLA4pGhRRia5fnb5qwqb9LtUhkzrclm-VZaDcE7j5hLtyLscLCtJeavuIk3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/professor/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"professor",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sterge toti studentii",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE0NDc3ODIsImlhdCI6MTYyMTQ0NzQ4MiwianRpIjoiOTEzMzExM2EtNGY4NS00MTVhLWI4MGItMDM1ZmQzOTNiMGE1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOGVkMTNlMjMtYTVjZC00Y2VmLWIyNjktNjVlMDhjNTEyYjQyIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiMzA5NTg1NDYtNDk3ZC00OTFjLWE2MjItNDFkYWVkMzk2M2QzIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.IvRT1DgDyZ1M9I2COZzGVFNyFD1R6IeBLOhtCozld4SitInXEHSYl4sf9X1tuavfb1HGGAo32RMJgK4GRC8ZievoZ85QlOqmr-ON9nkFHq_O9DVzhC7aPBGDFzTC5Vbh504DTSkourGwnhLAUIvkROFfRlEF4oaexpuwmK_pZOTAaHRJh3nRQ8Ncix6iTr55hxOEmg6Q7t1sw0aOlROlNkKS4hZTuzHNEh5AIfUCFTORYiSPWiX9AOYnVmeCMQnD4a5H467P1let1gCYjTkXSXW1szpLA4pGhRRia5fnb5qwqb9LtUhkzrclm-VZaDcE7j5hLtyLscLCtJeavuIk3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/student/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"student",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stergere tema pentru student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJaZ3ozM3JkWWhycFVmZk5UQ1pBekNjUTJBbWdYTzZqVEE5cUFqb1dqaDFBIn0.eyJleHAiOjE2MjE1MDk3MjUsImlhdCI6MTYyMTUwOTQyNSwianRpIjoiYzk4ZTQ3ZGQtMDlhYy00OThkLWI1M2QtMmUxNDA2NDZjMGUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL2VkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmVhYTc3NzctOWFjNi00NGQ4LTg0MDYtMDA3MDFjYmJlNTQ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoicHJvamVjdC1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiOTYxZGNlMGYtMDg0YS00NjJkLWEyZWItMjk3ODY4OWI3YjRmIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWVkdWNhdGlvbl9mb3JfZXZlcnlvbmUiLCJvZmZsaW5lX2FjY2VzcyIsIlJPTEVfUFJPRkVTU09SIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InByb2Zlc29yIn0.1zJLeTIlt9AGGgR0h4RZ9YMbVg7-0MMiP7duzbIc8bO6VPKt0NQ3p4Oh8ggYTrLE-TQ38j4-bUo8BjFOEoe_Y8nqEK_DaRQG5h_g5syhRZ_4-YXsFRFDd9Ddf-ytd-lv7X4Wy8kV9mSGMHsRuOxPlSX2Ez0SXMKprEVdOhoGxZeSFqAx4ew6FcsirSY7WQ09oxg7Bu22RkUzz0QAb0Np18aPS_WU7CNKqbER1xAAAVfpnvJUaDL-sPZMYEHautEwn0fpI5IOeNjIgRUK8aDzVud3zk1QjdyfNr1QdMLIzTLzS63dJgfTPXubS5snNCifAelPNUdu4e-5yOHGmesgoQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/grade?studentId=9&homeworkId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"grade"
+					],
+					"query": [
+						{
+							"key": "studentId",
+							"value": "9"
+						},
+						{
+							"key": "homeworkId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
