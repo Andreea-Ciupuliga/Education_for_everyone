@@ -1,10 +1,8 @@
 package com.example.Education_for_everyone.service;
 
 import com.example.Education_for_everyone.SendEmailService;
-import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
-import com.example.Education_for_everyone.exceptions.GroupNotFoundException;
 import com.example.Education_for_everyone.exceptions.UserAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.UserNotFoundException;
 import com.example.Education_for_everyone.models.Professor;

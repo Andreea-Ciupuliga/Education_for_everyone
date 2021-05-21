@@ -37,7 +37,7 @@ public class GradeService {
     @SneakyThrows
     public void assignHomeworkToStudent(Long studentId,Long homeworkId,String username)
     {
-        //ca sa verificam daca profeosrul este prezent intr-un grup
+        //ca sa verificam daca profesorul este prezent intr-un grup
         Boolean isPresent=false;
 
         Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));

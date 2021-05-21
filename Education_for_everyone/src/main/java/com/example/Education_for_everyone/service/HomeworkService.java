@@ -1,10 +1,6 @@
 package com.example.Education_for_everyone.service;
 
-import com.example.Education_for_everyone.dtos.GetBookDto;
-import com.example.Education_for_everyone.dtos.RegisterBookDto;
-import com.example.Education_for_everyone.exceptions.BookNotFoundException;
 import com.example.Education_for_everyone.exceptions.HomeworkNotFoundException;
-import com.example.Education_for_everyone.models.Book;
 import com.example.Education_for_everyone.models.Homework;
 import com.example.Education_for_everyone.repository.HomeworkRepository;
 import lombok.SneakyThrows;

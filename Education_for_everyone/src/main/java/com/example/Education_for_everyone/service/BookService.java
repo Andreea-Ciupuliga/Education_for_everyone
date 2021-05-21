@@ -1,18 +1,14 @@
 package com.example.Education_for_everyone.service;
 
-
 import com.example.Education_for_everyone.dtos.GetBookDto;
-import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.RegisterBookDto;
 import com.example.Education_for_everyone.exceptions.BookAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.BookNotFoundException;
 import com.example.Education_for_everyone.models.Book;
-import com.example.Education_for_everyone.models.Group;
 import com.example.Education_for_everyone.repository.BookRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

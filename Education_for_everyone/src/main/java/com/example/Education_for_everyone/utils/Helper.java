@@ -1,9 +1,8 @@
 package com.example.Education_for_everyone.utils;
 
-
 import org.keycloak.KeycloakPrincipal;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
+
 
 public class Helper {
 

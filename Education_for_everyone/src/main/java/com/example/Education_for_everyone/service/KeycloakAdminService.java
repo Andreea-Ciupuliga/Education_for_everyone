@@ -19,7 +19,7 @@ import java.util.Collections;
 public class KeycloakAdminService {
 
     @Value("${keycloak.realm}")
-    private String keycloakRealm; /* aici este vorba de realm-ul pe care vreau sa il manageruies, in cazul nostru e education_for_everyone.
+    private String keycloakRealm; /* aici este vorba de realm-ul pe care vreau sa il manageruiesc, in cazul nostru e education_for_everyone.
     Ne folosim de @Value("${keycloak.realm}") ca sa luam numele realmului (education_for_everyone) din application.yml */
 
     private final Keycloak keycloak; //obiectul asta nu e un Bean, ceva ce poate fi injectat prin @Autowired asa ca trebuie sa creez eu un Bean de tipul Keycloak
