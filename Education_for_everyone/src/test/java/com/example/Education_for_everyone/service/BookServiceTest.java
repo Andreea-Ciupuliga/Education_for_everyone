@@ -1,13 +1,7 @@
 package com.example.Education_for_everyone.service;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.Education_for_everyone.dtos.GetBookDto;
-import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.exceptions.BookNotFoundException;
-import com.example.Education_for_everyone.exceptions.UserAlreadyExistException;
 import com.example.Education_for_everyone.models.Book;
-import com.example.Education_for_everyone.models.Professor;
 import com.example.Education_for_everyone.repository.BookRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,9 +46,9 @@ class BookServiceTest {
 
 
         //Assert
-        Assertions.assertEquals(title,result.getTitle()); //rezultatul meu trebuie sa aiba emailul egal cu emailul pe care il definesc eu in Arrange
-        Assertions.assertEquals(author,result.getAuthor());//rezultatul meu trebuie sa aiba firstName egal cu firstName pe care il definesc eu in Arrange
-        Assertions.assertEquals(availableCopies,result.getAvailableCopies());//rezultatul meu trebuie sa aiba lastName egal cu lastName pe care il definesc eu in Arrange
+        Assertions.assertEquals(title,result.getTitle()); //rezultatul meu trebuie sa aiba title egal cu title pe care il definesc eu in Arrange
+        Assertions.assertEquals(author,result.getAuthor());//rezultatul meu trebuie sa aiba author egal cu author pe care il definesc eu in Arrange
+        Assertions.assertEquals(availableCopies,result.getAvailableCopies());//rezultatul meu trebuie sa aiba availableCopies egal cu availableCopies pe care il definesc eu in Arrange
         verify(bookRepository).findById(anyLong());
     }
 
@@ -80,7 +74,7 @@ class BookServiceTest {
 
 
         verify(bookRepository, times(1)).findById(book.getId());//verific daca se face interactiunea cu findById doar o data
-        verify(bookRepository,never()).delete(any(Book.class));//verific daca delete-ul sa se apeleze o data
+        verify(bookRepository,never()).delete(any(Book.class));//ma asigur ca nu s-a apelat delete
 
     }
 }
