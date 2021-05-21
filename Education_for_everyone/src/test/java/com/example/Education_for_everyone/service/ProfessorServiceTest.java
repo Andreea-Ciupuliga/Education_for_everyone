@@ -35,7 +35,7 @@ class ProfessorServiceTest {
         professorService = new ProfessorService(professorRepository,sendEmailService,keycloakAdminService);
     }
 
-    @Test//daca exista un user cu username-ul asta in baza de date sa se arunce o exceptie
+    @Test
     void registerShouldFailIfUsernameIsAlreadyTaken() {
 
         //Arrange

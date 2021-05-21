@@ -33,7 +33,7 @@ class GroupServiceTest {
         groupService = new GroupService(groupRepository,professorRepository);
     }
 
-    @Test//daca exista un grup cu acelasi nume in baza de date sa se arunce o exceptie
+    @Test
     void registerShouldFailIfGroupNameIsAlreadyTaken() {
 
         //Arrange
@@ -63,7 +63,7 @@ class GroupServiceTest {
 
     }
 
-    @Test//daca exista un grup cu acelasi nume in baza de date sa se arunce o exceptie
+    @Test
     void registerShouldFailIfProfessorDoesNotExist() {
 
         //Arrange
@@ -92,7 +92,7 @@ class GroupServiceTest {
 
     }
 
-    @Test //in testul asta verificam ca registerul se face cu succes
+    @Test
     void registerShouldSucceed() {
 
         //Arrange

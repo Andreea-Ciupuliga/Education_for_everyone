@@ -46,7 +46,7 @@ class StudentServiceTest {
         studentService = new StudentService(studentRepository,sendEmailService,keycloakAdminService,groupOfStudentsRepository,groupRepository,studentsBorrowBooksRepository,bookRepository);
     }
 
-    @Test//daca exista un user cu username-ul asta in baza de date sa se arunce o exceptie
+    @Test
     void registerShouldFailIfUsernameIsAlreadyTaken() {
 
         //Arrange
@@ -65,7 +65,6 @@ class StudentServiceTest {
 
         //eu verific cazul in care studentul exista cu username-ul ala asa ca ma astept ca metoda mea sa arunce o exceptie deci rezultatul dorit ar fi sa arunce o exceptie
         Assertions.assertThrows(UserAlreadyExistException.class, () -> studentService.registerStudent(registerStudentDto));
-
 
         //verific daca se face interactiunea cu findByUsername doar o data
         verify(studentRepository, times(1)).findByUsername(username);
