@@ -52,7 +52,7 @@ class HomeworkServiceTest {
 
 
     @Test
-    void deleteBookShouldFailIfBookIsNotFound() {
+    void deleteHomeworkShouldFailIfHomeworkIsNotFound() {
         //Arrange
         Long id=1L;
         String deadline= "deadline";
@@ -78,7 +78,7 @@ class HomeworkServiceTest {
 
 
     @Test
-    void getBookShouldSucceed() {
+    void getHomeworkShouldSucceed() {
         //Arrange
         Long id=1L;
         String deadline= "deadline";
