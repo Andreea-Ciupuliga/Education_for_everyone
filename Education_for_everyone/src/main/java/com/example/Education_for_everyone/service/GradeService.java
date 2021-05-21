@@ -40,10 +40,11 @@ public class GradeService {
         //ca sa verificam daca profeosrul este prezent intr-un grup
         Boolean isPresent=false;
 
+        Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
+
         //vedem daca exista profesorul(dupa username-ul din token) care vrea sa asigneze tema studentului
         Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
 
-        Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
         Homework homework=homeworkRepository.findById(homeworkId).orElseThrow(()->new HomeworkNotFoundException("homework not found"));
 
 
@@ -86,10 +87,10 @@ public class GradeService {
         //ca sa verificam daca profeosrul este prezent intr-un grup
         Boolean isPresent=false;
 
+        Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
+
         //vedem daca exista profesorul(dupa username-ul din token) care vrea sa asigneze nota studentului
         Professor professor = professorRepository.findByUsername(username).orElseThrow(()->new UserNotFoundException("professor not found"));
-
-        Student student = studentRepository.findById(studentId).orElseThrow(()->new UserNotFoundException("student not found"));
 
         //vedem lista de grupuri din care face parte studentul (id urile grupurilor mai exact)
         ArrayList groupIds=groupOfStudentsRepository.findGroupIdByStudentId(studentId);
