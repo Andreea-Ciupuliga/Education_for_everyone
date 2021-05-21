@@ -1,16 +1,12 @@
 package com.example.Education_for_everyone.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Builder
 @Data
