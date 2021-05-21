@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @Import(KeycloakSpringBootConfigResolver.class)
 public class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
 
-    /* De primele 3 metode are nevoie sprin in comunicarea cu keycloak. Pe baza lor se face decodarea token-ului
+    /* De primele 3 metode are nevoie spring in comunicarea cu keycloak. Pe baza lor se face decodarea token-ului
      * pentru a vedea ce rol are userul si tot pe baza lor se face validarea respectivului token. Le putem
      * lua ca atare */
 
@@ -46,11 +46,8 @@ public class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
         http
                 .cors().and().csrf().disable()
                 .authorizeRequests()    //sa se autorizeze requesturile
-                //.antMatchers("/v1/user/register").permitAll()
                 .antMatchers("/student/register").permitAll() //dam acces la toti ptc nu ai cum sa fii autentificat atunci cand te inregistrezi pt prima data
-                .antMatchers("/professor/register").permitAll() //dam acces la toti ptc nu ai cum sa fii autentificat atunci cand te inregistrezi pt prima data
-                //.antMatchers("/roles/admin").hasRole("ADMIN") //sa poata fi accesat doar de userii care au rol de admin
-                //.antMatchers("/v1/user/delete").hasRole("ADMIN")
+                .antMatchers("/professor/register").permitAll()
                 .anyRequest().authenticated();  //orice endpoint trebuie sa fii autentificat pentru a-l putea apela
     }
 
