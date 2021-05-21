@@ -1,13 +1,11 @@
 package com.example.Education_for_everyone.service;
 
-import com.example.Education_for_everyone.dtos.RegisterStudentDto;
 import com.example.Education_for_everyone.models.Book;
 import com.example.Education_for_everyone.models.Student;
 import com.example.Education_for_everyone.models.StudentsBorrowBooks;
 import com.example.Education_for_everyone.repository.BookRepository;
 import com.example.Education_for_everyone.repository.StudentRepository;
 import com.example.Education_for_everyone.repository.StudentsBorrowBooksRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

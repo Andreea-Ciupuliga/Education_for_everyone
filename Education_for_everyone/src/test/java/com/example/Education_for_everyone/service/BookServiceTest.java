@@ -65,7 +65,7 @@ class BookServiceTest {
 
         //Act
         when(bookRepository.findById(book.getId())).thenReturn(Optional.empty());
-        //cand cauta cartea dupa id returnez un optional emplty ptc nu am gasit o in baza de date
+        //cand cauta cartea dupa id returnez un optional empty ptc nu am gasit o in baza de date
 
 
         //Assert

@@ -1,6 +1,5 @@
 package com.example.Education_for_everyone.service;
 import com.example.Education_for_everyone.dtos.RegisterGroupDto;
-import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
 import com.example.Education_for_everyone.exceptions.GroupAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.UserNotFoundException;
 import com.example.Education_for_everyone.models.Group;
@@ -45,8 +44,7 @@ class GroupServiceTest {
 
         //Act
 
-        when(groupRepository.findByGroupName(groupName)).thenReturn(Optional.of(group)); /* definesc ce se intampla cand se apeleaza groupRepository.findByGroupName
-        si anume o sa returnez un optional de group ptc asta returneaza findByGroupName. Astfel if-ul din GroupService va fi true si se va arunca o exceptie*/
+        when(groupRepository.findByGroupName(groupName)).thenReturn(Optional.of(group));
 
 
         //Assert
@@ -111,7 +109,6 @@ class GroupServiceTest {
         se gaseasca profesorul respectiv si sa nu arunce exceptie cu user not found */
 
         groupService.registerGroup(registerGroupDto,professorUsername);
-
 
 
         //Assert

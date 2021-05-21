@@ -1,10 +1,6 @@
 package com.example.Education_for_everyone.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.Education_for_everyone.SendEmailService;
-import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
-import com.example.Education_for_everyone.exceptions.UserAlreadyExistException;
 import com.example.Education_for_everyone.exceptions.UserNotFoundException;
 import com.example.Education_for_everyone.models.*;
 import com.example.Education_for_everyone.repository.*;
@@ -15,10 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -105,14 +98,11 @@ class GradeServiceTest {
 
         //Assert
 
-        //verific daca se face interactiunea cu findById doar o data
         verify(studentRepository, times(1)).findById(studentId);
         verify(professorRepository, times(1)).findByUsername(username);
         verify(homeworkRepository, times(1)).findById(homeworkId);
         verify(groupOfStudentsRepository, times(1)).findGroupIdByStudentId(studentId);
         verify(groupRepository, times(1)).findByprofessorIdAndgroupId(professor.getId(),group.getId());
-
-        //vreau sa ma asigur ca gradeRepository.save(grade) nu s-a apelat (ca nu s-a fct save) si ca flow-ul s-a intrerupt dupa ce am aruncat exceptia
         verify(gradeRepository, times(1)).save(any(Grade.class));
 
     }
