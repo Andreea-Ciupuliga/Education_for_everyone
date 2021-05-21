@@ -27,7 +27,6 @@ public class GradeController {
     public ResponseEntity<SuccessDto> assignHomeworkToStudent(@RequestParam Long studentId, @RequestParam Long homeworkId,Authentication authentication)
     {
         gradeService.assignHomeworkToStudent(studentId,homeworkId,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -37,7 +36,6 @@ public class GradeController {
     public ResponseEntity<SuccessDto> assignScoreToStudent(@RequestParam Long studentId, @RequestParam Long homeworkId,@RequestParam Long score,Authentication authentication)
     {
         gradeService.assignScoreToStudent(studentId,homeworkId,score,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -46,7 +44,6 @@ public class GradeController {
     public ResponseEntity<SuccessDto> deleteHomeworkFromStudent(@RequestParam Long studentId,@RequestParam Long homeworkId,Authentication authentication)
     {
         gradeService.removeHomeworkFromStudent(studentId,homeworkId,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

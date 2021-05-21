@@ -1,8 +1,4 @@
 package com.example.Education_for_everyone.controller;
-
-
-import com.example.Education_for_everyone.SendEmailService;
-import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.GetStudentDto;
 import com.example.Education_for_everyone.dtos.RegisterStudentDto;
 import com.example.Education_for_everyone.service.StudentService;
@@ -19,20 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
-
 @RequestMapping("/student")
 public class StudentController {
 
     private StudentService studentService;
-
 
     @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
 
     }
-
 
     @PostMapping("/register")
     @SneakyThrows
@@ -57,7 +49,6 @@ public class StudentController {
     public ResponseEntity<SuccessDto>removeAllStudents()
     {
         studentService.removeAllStudents();
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

@@ -28,7 +28,6 @@ public class BookController {
     public ResponseEntity<SuccessDto> registerBook(@RequestBody RegisterBookDto registerBookDto)
     {
         bookService.registerBook(registerBookDto);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -38,7 +37,6 @@ public class BookController {
     public ResponseEntity<SuccessDto>removeBook(@RequestParam Long bookId)
     {
         bookService.removeBook(bookId);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -56,7 +54,6 @@ public class BookController {
     public ResponseEntity<SuccessDto>putBook(@RequestParam Long bookId,@RequestBody RegisterBookDto registerBookDto)
     {
         bookService.putBook(bookId,registerBookDto);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

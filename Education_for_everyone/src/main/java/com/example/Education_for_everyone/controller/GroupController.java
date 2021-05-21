@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
-
 @RequestMapping("/group")
 public class GroupController {
 
@@ -26,7 +24,6 @@ public class GroupController {
     public GroupController(GroupService groupService) {
         this.groupService = groupService;
     }
-
 
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PostMapping("/register")

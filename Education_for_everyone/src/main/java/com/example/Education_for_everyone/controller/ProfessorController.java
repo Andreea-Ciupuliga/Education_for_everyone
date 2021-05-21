@@ -1,7 +1,4 @@
 package com.example.Education_for_everyone.controller;
-
-
-import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.GetProfessorDto;
 import com.example.Education_for_everyone.dtos.RegisterProfessorDto;
 import com.example.Education_for_everyone.service.ProfessorService;
@@ -14,12 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-
 import java.util.List;
 
 @RestController
-
-
 @RequestMapping("/professor")
 public class ProfessorController {
     private ProfessorService professorService;
@@ -52,7 +46,6 @@ public class ProfessorController {
     public ResponseEntity<SuccessDto>removeAllProfessors()
     {
         professorService.removeAllProfessors();
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

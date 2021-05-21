@@ -1,7 +1,4 @@
 package com.example.Education_for_everyone.controller;
-
-
-import com.example.Education_for_everyone.dtos.GetGroupDto;
 import com.example.Education_for_everyone.dtos.GetStudentDto;
 import com.example.Education_for_everyone.service.GroupOfStudentsService;
 import com.example.Education_for_everyone.utils.Helper;
@@ -13,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -32,7 +28,6 @@ public class GroupOfStudentsController {
     public ResponseEntity<SuccessDto> addStudentInGroup(@RequestParam Long studentId, @RequestParam Long groupId, Authentication authentication)
     {
         groupOfStudentsService.addStudentInGroup(studentId,groupId,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -42,7 +37,6 @@ public class GroupOfStudentsController {
     public ResponseEntity<SuccessDto> deleteStudentFromGroup(@RequestParam Long studentId,@RequestParam Long groupId,Authentication authentication)
     {
         groupOfStudentsService.removeStudentFromGroup(studentId,groupId,Helper.getKeycloakUser(authentication));
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 

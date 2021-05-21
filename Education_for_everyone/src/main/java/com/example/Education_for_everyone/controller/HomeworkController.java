@@ -1,7 +1,4 @@
 package com.example.Education_for_everyone.controller;
-
-import com.example.Education_for_everyone.dtos.GetBookDto;
-import com.example.Education_for_everyone.dtos.RegisterBookDto;
 import com.example.Education_for_everyone.models.Homework;
 import com.example.Education_for_everyone.service.HomeworkService;
 import com.example.Education_for_everyone.utils.SuccessDto;
@@ -22,7 +19,6 @@ public class HomeworkController {
     public HomeworkController(HomeworkService homeworkService) {
         this.homeworkService = homeworkService;
     }
-
 
     @PreAuthorize("hasRole('PROFESSOR')")
     @PostMapping("/register")
@@ -47,7 +43,6 @@ public class HomeworkController {
     public ResponseEntity<SuccessDto>removeHomework(@RequestParam Long homeworkId)
     {
         homeworkService.removeHomework(homeworkId);
-
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
