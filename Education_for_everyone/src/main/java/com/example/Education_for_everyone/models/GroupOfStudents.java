@@ -1,17 +1,17 @@
 package com.example.Education_for_everyone.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "group_of_students")
+@Table(name = "GROUP_OF_STUDENTS")
 
 public class GroupOfStudents {
 
@@ -19,13 +19,13 @@ public class GroupOfStudents {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "group_name")
+    @Column(name = "GROUP_NAME")
     private String groupName;
 
-    @Column(name = "student_first_name")
+    @Column(name = "STUDENT_FIRST_NAME")
     private String studentFirstName;
 
-    @Column(name = "student_last_name")
+    @Column(name = "STUDENT_LAST_NAME")
     private String studentLastName;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
@@ -33,7 +33,4 @@ public class GroupOfStudents {
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     private Group group;
-
-
-
 }

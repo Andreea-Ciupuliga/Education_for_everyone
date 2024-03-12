@@ -1,11 +1,12 @@
 package com.example.Education_for_everyone.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+
 import java.util.List;
 
 @Builder
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "professor")
+@Table(name = "PROFESSOR")
 
 public class Professor {
 
@@ -21,25 +22,25 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "username")
+    @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "subject")
+    @Column(name = "SUBJECT")
     private String subject;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "professor",orphanRemoval = true,cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "professor", orphanRemoval = true, cascade = {CascadeType.ALL})
     List<Group> groups;
 }
