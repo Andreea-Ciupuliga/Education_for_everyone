@@ -1,4 +1,5 @@
-package com.example.Education_for_everyone.dtos;
+package com.example.educationforeveryone.dtos;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class GetProfessorDto {
-
     private String firstName;
-
     private String lastName;
-
     private String email;
 }

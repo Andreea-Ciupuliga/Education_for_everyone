@@ -1,4 +1,5 @@
-package com.example.Education_for_everyone.dtos;
+package com.example.educationforeveryone.dtos;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,16 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterProfessorDto {
+public class GetStudentDto {
     private String firstName;
-
     private String lastName;
-
     private String email;
-
-    private String password;
-
-    private String username;
-
-    private String subject;
 }
