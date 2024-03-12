@@ -1,6 +1,6 @@
-package com.example.Education_for_everyone.repository;
+package com.example.educationforeveryone.repository;
 
-import com.example.Education_for_everyone.models.Homework;
+import com.example.educationforeveryone.models.Homework;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

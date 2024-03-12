@@ -1,7 +1,7 @@
-package com.example.Education_for_everyone.repository;
+package com.example.educationforeveryone.repository;
 
-import com.example.Education_for_everyone.dtos.GetProfessorDto;
-import com.example.Education_for_everyone.models.Professor;
+import com.example.educationforeveryone.dtos.GetProfessorDto;
+import com.example.educationforeveryone.models.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,9 +16,9 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
     Optional<Professor> findByEmail(String email);
 
-    @Query("SELECT new com.example.Education_for_everyone.dtos.GetProfessorDto(p.firstName,p.lastName,p.email) FROM Professor p")
+    @Query("SELECT new com.example.educationforeveryone.dtos.GetProfessorDto(p.firstName,p.lastName,p.email) FROM Professor p")
     List<GetProfessorDto> findAllProfessors();
 
-    @Query("SELECT new com.example.Education_for_everyone.dtos.GetProfessorDto(p.firstName,p.lastName,p.email) FROM Professor p WHERE p.lastName LIKE %:name% OR p.firstName LIKE %:name%")
+    @Query("SELECT new com.example.educationforeveryone.dtos.GetProfessorDto(p.firstName,p.lastName,p.email) FROM Professor p WHERE p.lastName LIKE %:name% OR p.firstName LIKE %:name%")
     List<GetProfessorDto> findAllProfessorsByName(@Param("name") String name);
 }

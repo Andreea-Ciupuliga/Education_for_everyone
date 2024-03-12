@@ -1,4 +1,4 @@
-package com.example.Education_for_everyone.models;
+package com.example.educationforeveryone.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

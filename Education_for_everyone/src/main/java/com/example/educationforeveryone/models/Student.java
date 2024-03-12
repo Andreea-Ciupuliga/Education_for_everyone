@@ -1,4 +1,4 @@
-package com.example.Education_for_everyone.models;
+package com.example.educationforeveryone.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -14,9 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PROFESSOR")
-
-public class Professor {
+@Table(name = "STUDENT")
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +36,15 @@ public class Professor {
     @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "SUBJECT")
-    private String subject;
+    @JsonIgnore
+    @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.ALL})
+    List<GroupOfStudents> groupOfStudents;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "professor", orphanRemoval = true, cascade = {CascadeType.ALL})
-    List<Group> groups;
+    @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.ALL})
+    List<StudentsBorrowBooks> studentsBorrowBooks;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.ALL})
+    List<Grade> grade;
 }

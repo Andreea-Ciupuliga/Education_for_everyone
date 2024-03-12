@@ -1,6 +1,6 @@
-package com.example.Education_for_everyone.repository;
+package com.example.educationforeveryone.repository;
 
-import com.example.Education_for_everyone.models.StudentsBorrowBooks;
+import com.example.educationforeveryone.models.StudentsBorrowBooks;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

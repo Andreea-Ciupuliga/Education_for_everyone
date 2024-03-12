@@ -1,4 +1,4 @@
-package com.example.Education_for_everyone.models;
+package com.example.educationforeveryone.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,8 +27,10 @@ public class Grade {
     private Long score;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "HOMEWORK_ID")
     private Homework homework;
 }

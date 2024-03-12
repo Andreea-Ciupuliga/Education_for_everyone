@@ -1,4 +1,4 @@
-package com.example.Education_for_everyone.models;
+package com.example.educationforeveryone.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,16 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GROUP_OF_STUDENTS")
-
-public class GroupOfStudents {
+@Table(name = "STUDENTS_BORROW_BOOKS")
+public class StudentsBorrowBooks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "GROUP_NAME")
-    private String groupName;
+    @Column(name = "TITLE")
+    private String title;
 
     @Column(name = "STUDENT_FIRST_NAME")
     private String studentFirstName;
@@ -32,5 +31,5 @@ public class GroupOfStudents {
     private Student student;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
-    private Group group;
+    private Book book;
 }
