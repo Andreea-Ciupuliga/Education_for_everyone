@@ -5,19 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StudentsBorrowBooksRepository  extends JpaRepository<StudentsBorrowBooks, Long> {
-
+public interface StudentsBorrowBooksRepository extends JpaRepository<StudentsBorrowBooks, Long> {
     @Query("SELECT b from StudentsBorrowBooks b where b.student.id =:studentId AND b.book.id =:bookId")
-    Optional<StudentsBorrowBooks> findBystudentIdAndbookId(@Param("studentId") Long studentId, @Param("bookId")Long bookId);
+    Optional<StudentsBorrowBooks> findByStudentIdAndBookId(@Param("studentId") Long studentId, @Param("bookId") Long bookId);
 
-    @Query(value = "SELECT title FROM students_borrow_books where student_id=:studentId", nativeQuery = true)
+    @Query("SELECT b.title FROM StudentsBorrowBooks b where b.student.id=:studentId")
     List<String> findTitleByStudentId(@Param("studentId") Long studentId);
 
     @Query("SELECT  b.book.id FROM StudentsBorrowBooks b WHERE b.student.id=:studentId")
-    ArrayList<Long> findBookIdByStudentId (@Param("studentId") Long studentId);
+    List<Long> findBookIdByStudentId(@Param("studentId") Long studentId);
 }
