@@ -9,10 +9,12 @@ import com.example.educationforeveryone.models.Group;
 import com.example.educationforeveryone.models.Professor;
 import com.example.educationforeveryone.repository.GroupRepository;
 import com.example.educationforeveryone.repository.ProfessorRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class GroupService {
 
@@ -25,77 +27,79 @@ public class GroupService {
     }
 
     public void registerGroup(RegisterGroupDto registerGroupDto, String username) {
-
-        //verificam daca exista deja un grup cu numele asta
         if (groupRepository.findByGroupName(registerGroupDto.getGroupName()).isPresent()) {
-            throw new GroupAlreadyExistException("Group Already Exist");
+            throw new GroupAlreadyExistException("Group already exist!");
         }
-
-        //Cautam profesorul care vrea sa faca grupul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
-        Professor professor = professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
-
-        Group group = Group.builder()
-                .professor(Professor.builder().id(professor.getId()).build()) //id ul profesorului o sa il dam automat de la profesorul gasit dupa username
-                .groupName(registerGroupDto.getGroupName())
-                .subject(registerGroupDto.getSubject())
-                .yearOfStudy(registerGroupDto.getYearOfStudy())
-                .availableSeats(registerGroupDto.getTotalSeats()) // la inceput locurile libere ar trebui sa fie acelasi numar ca locurile totale doarece daca abia s-a creat grupul nu a ocupat nimeni nimic
-                .totalSeats(registerGroupDto.getTotalSeats()).build();
-
-        groupRepository.save(group);
-
+        Professor professor = findProfessorByUsernameOrThrowException(username);
+        Group savedGroup = groupRepository.save(buildGroup(registerGroupDto, professor));
+        log.info("Successfully saved group with id: {}", savedGroup.getId());
     }
 
     public void removeGroup(Long groupId, String username) {
-        //verificam daca grupul exista
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("group not found"));
-
-        //daca e admin poate sa stearga orice grup
-        if (username.equals("admin"))
+        Group group = findGroupByIdOrThrowException(groupId);
+        if (username.equals("admin")) {
             groupRepository.delete(group);
-
-
-        else {
-            //daca nu e admin verificam daca este profesor. Il cautam in baza de date dupa username-ul din token
-            Professor professor = professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
-
-            //daca e profesor la grupul respectiv il poate sterge
-            if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent()) {
+            log.info("Successfully removed group with id: {}", groupId);
+        } else {
+            Professor professor = findProfessorByUsernameOrThrowException(username); // If not an admin, we check if the user is a professor. We search for them in the database using the username from the token
+            if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent()) { // If they are a professor in that group, they can delete it.
                 groupRepository.delete(group);
-            }
-
-            //daca nu e profesor la grupul respectiv nu il poate sterge si aruncam exceptie
-            else if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) {
-                throw new UserNotFoundException("Professor not in this group. You cannot delete a group you are not part of");
+                log.info("Successfully removed group with id: {}", groupId);
+            } else if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) { // If they are not a professor in that group, they cannot delete it, and we throw an exception
+                throw new UserNotFoundException("Professor not in this group. You cannot delete a group you are not part of!");
             }
         }
     }
 
-    public GetGroupDto getGroup(Long groupId) {
-        //verificam daca exista grupul cu id-ul respectiv
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("group not found"));
-
-        GetGroupDto getGrouptDto = GetGroupDto.builder()
-                .groupName(group.getGroupName())
-                .subject(group.getSubject())
-                .yearOfStudy(group.getYearOfStudy())
-                .availableSeats(group.getAvailableSeats()).build();
-
-        return getGrouptDto;
+    public GetGroupDto getGroupById(Long groupId) {
+        Group group = findGroupByIdOrThrowException(groupId);
+        return buildGetGroupDto(group);
     }
 
-    public void putGroup(Long groupId, RegisterGroupDto newRegisterGroupDto, String username) {
-        //vedem daca exista grupul cu id-ul respectiv
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("group not found"));
-
-        //vedem daca exista in baza de date profesorul cu username-ul extras din token
-        Professor professor = professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
-
-        //daca profeosrul nu preda la grupul respectiv aruncam exceptie
+    public void updateGroup(Long groupId, RegisterGroupDto newRegisterGroupDto, String username) {
+        Group group = findGroupByIdOrThrowException(groupId);
+        Professor professor = findProfessorByUsernameOrThrowException(username);
         if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) {
-            throw new UserNotFoundException("Professor not in this group. You cannot edit a group you are not part of");
+            throw new UserNotFoundException("Professor not in this group. You cannot edit a group you are not part of!");
         }
+        setFieldsIfNotNull(newRegisterGroupDto, group);
+        Group savedGroup = groupRepository.save(group);
+        log.info("Successfully updated group with id: {}", savedGroup.getId());
+    }
 
+    public List<GetGroupDto> getAllGroups() {
+        List<GetGroupDto> allGroups = groupRepository.findAllGroups();
+        if (allGroups.isEmpty()) {
+            throw new GroupNotFoundException("There are no groups to display");
+        }
+        return allGroups;
+    }
+
+    public List<GetGroupDto> getAllGroupsBySubject(String subject) {
+        List<GetGroupDto> groupsBySubject = groupRepository.findAllBySubjectContains(subject);
+        if (groupsBySubject.isEmpty()) {
+            throw new GroupNotFoundException("Subject Not Found");
+        }
+        return groupsBySubject;
+    }
+
+    public List<GetGroupDto> getAllGroupsByProfessorName(String professorName) {
+        List<GetGroupDto> groupsByProfessorName = groupRepository.findAllByProfessorNameContains(professorName);
+        if (groupsByProfessorName.isEmpty()) {
+            throw new UserNotFoundException("Professor Not Found");
+        }
+        return groupsByProfessorName;
+    }
+
+    private Group findGroupByIdOrThrowException(Long groupId) {
+        return groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("Group not found"));
+    }
+
+    private Professor findProfessorByUsernameOrThrowException(String username) {
+        return professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
+    }
+
+    private void setFieldsIfNotNull(RegisterGroupDto newRegisterGroupDto, Group group) {
         if (newRegisterGroupDto.getGroupName() != null)
             group.setGroupName(newRegisterGroupDto.getGroupName());
 
@@ -110,37 +114,23 @@ public class GroupService {
 
         if (newRegisterGroupDto.getTotalSeats() != null)
             group.setTotalSeats(newRegisterGroupDto.getTotalSeats());
-
-        groupRepository.save(group);
     }
 
-    public List<GetGroupDto> getAllGroups() {
-
-        if (groupRepository.findAllGroups().isEmpty())
-            throw new GroupNotFoundException("there are no groups to display");
-
-        //afisam toate grupurile
-        return groupRepository.findAllGroups();
+    private Group buildGroup(RegisterGroupDto registerGroupDto, Professor professor) {
+        return Group.builder()
+                .professor(Professor.builder().id(professor.getId()).build())
+                .groupName(registerGroupDto.getGroupName())
+                .subject(registerGroupDto.getSubject())
+                .yearOfStudy(registerGroupDto.getYearOfStudy())
+                .availableSeats(registerGroupDto.getTotalSeats()) // At the beginning, the available seats should be the same as the total number of seats because if the group has just been created, no one has occupied any yet
+                .totalSeats(registerGroupDto.getTotalSeats()).build();
     }
 
-    public List<GetGroupDto> getAllGroupsBySubject(String subject) {
-
-        //cautam toate grupurile la care se preda materia respectiva
-        if (groupRepository.findAllBySubjectContains(subject).isEmpty()) {
-            throw new GroupNotFoundException("Subject Not Found");
-        }
-
-        return groupRepository.findAllBySubjectContains(subject);
+    private GetGroupDto buildGetGroupDto(Group group) {
+        return GetGroupDto.builder()
+                .groupName(group.getGroupName())
+                .subject(group.getSubject())
+                .yearOfStudy(group.getYearOfStudy())
+                .availableSeats(group.getAvailableSeats()).build();
     }
-
-    public List<GetGroupDto> getAllGroupsByProfessorName(String professorName) {
-
-        //cautam toate grupurile la care se preda profeosrul cu numele respectiv
-        if (groupRepository.findAllByProfessorNameContains(professorName).isEmpty()) {
-            throw new UserNotFoundException("Professor Not Found");
-        }
-
-        return groupRepository.findAllByProfessorNameContains(professorName);
-    }
-
 }

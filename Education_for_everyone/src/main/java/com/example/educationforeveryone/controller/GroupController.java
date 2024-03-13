@@ -29,10 +29,7 @@ public class GroupController {
     @Operation(summary = "Register a group", description = "Register a group")
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PostMapping("/register")
-    public ResponseEntity<SuccessDto> registerGroup(
-            @RequestBody RegisterGroupDto registerGroupDto,
-            Authentication authentication
-    ) {
+    public ResponseEntity<SuccessDto> registerGroup(@RequestBody RegisterGroupDto registerGroupDto, Authentication authentication) {
         groupService.registerGroup(registerGroupDto, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
@@ -40,10 +37,7 @@ public class GroupController {
     @Operation(summary = "Remove a group", description = "Remove a group")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @DeleteMapping("/{group-id}")
-    public ResponseEntity<SuccessDto> removeGroup(
-            @PathVariable("group-id") Long groupId,
-            Authentication authentication
-    ) {
+    public ResponseEntity<SuccessDto> removeGroup(@PathVariable("group-id") Long groupId, Authentication authentication) {
         groupService.removeGroup(groupId, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
@@ -51,46 +45,36 @@ public class GroupController {
     @Operation(summary = "Get a group", description = "Get a group by group id")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping("/{group-id}")
-    public ResponseEntity<GetGroupDto> getGroup(
-            @PathVariable("group-id") Long groupId
-    ) {
-        return new ResponseEntity<>(groupService.getGroup(groupId), HttpStatus.OK);
+    public ResponseEntity<GetGroupDto> getGroupById(@PathVariable("group-id") Long groupId) {
+        return new ResponseEntity<>(groupService.getGroupById(groupId), HttpStatus.OK);
     }
 
     @Operation(summary = "Update a group", description = "Update a group")
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PutMapping("/{group-id}")
-    public ResponseEntity<SuccessDto> putGroup(
-            @PathVariable("group-id") Long groupId,
-            @RequestBody RegisterGroupDto registerGroupDto,
-            Authentication authentication
-    ) {
-        groupService.putGroup(groupId, registerGroupDto, Helper.getKeycloakUser(authentication));
+    public ResponseEntity<SuccessDto> putGroup(@PathVariable("group-id") Long groupId, @RequestBody RegisterGroupDto registerGroupDto, Authentication authentication) {
+        groupService.updateGroup(groupId, registerGroupDto, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
     @Operation(summary = "Get all groups", description = "Get all groups")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
-    @GetMapping("/show-groups")
+    @GetMapping()
     public ResponseEntity<List<GetGroupDto>> getAllGroups() {
         return new ResponseEntity<>(groupService.getAllGroups(), HttpStatus.OK);
     }
 
     @Operation(summary = "Get all groups by subject", description = "Get all groups by subject")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
-    @GetMapping("/show-groups-by-subject/{subject}")
-    public ResponseEntity<List<GetGroupDto>> getAllGroupsBySubject(
-            @PathVariable String subject
-    ) {
+    @GetMapping("/by-subject/{subject}")
+    public ResponseEntity<List<GetGroupDto>> getAllGroupsBySubject(@PathVariable String subject) {
         return new ResponseEntity<>(groupService.getAllGroupsBySubject(subject), HttpStatus.OK);
     }
 
     @Operation(summary = "Get all groups by professor name", description = "Get all groups by professor name")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
-    @GetMapping("/show-groups-by-professor-name/{professor-name}")
-    public ResponseEntity<List<GetGroupDto>> getAllGroupsByProfessorName(
-            @PathVariable("professor-name") String professorName
-    ) {
+    @GetMapping("/by-professor-name/{professor-name}")
+    public ResponseEntity<List<GetGroupDto>> getAllGroupsByProfessorName(@PathVariable("professor-name") String professorName) {
         return new ResponseEntity<>(groupService.getAllGroupsByProfessorName(professorName), HttpStatus.OK);
     }
 }
