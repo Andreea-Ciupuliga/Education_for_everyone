@@ -37,17 +37,11 @@ public class GroupService {
 
     public void removeGroup(Long groupId, String username) {
         Group group = findGroupByIdOrThrowException(groupId);
-        if (username.equals("admin")) {
+        if (username.equals("admin") || isProfessorInGroup(username, groupId)) {
             groupRepository.delete(group);
             log.info("Successfully removed group with id: {}", groupId);
         } else {
-            Professor professor = findProfessorByUsernameOrThrowException(username); // If not an admin, we check if the user is a professor. We search for them in the database using the username from the token
-            if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent()) { // If they are a professor in that group, they can delete it.
-                groupRepository.delete(group);
-                log.info("Successfully removed group with id: {}", groupId);
-            } else if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) { // If they are not a professor in that group, they cannot delete it, and we throw an exception
-                throw new UserNotFoundException("Professor not in this group. You cannot delete a group you are not part of!");
-            }
+            throw new UserNotFoundException("Professor not in this group. You cannot delete a group you are not part of!");
         }
     }
 
@@ -89,6 +83,11 @@ public class GroupService {
             throw new UserNotFoundException("Professor Not Found");
         }
         return groupsByProfessorName;
+    }
+
+    private boolean isProfessorInGroup(String username, Long groupId) {
+        Professor professor = findProfessorByUsernameOrThrowException(username);
+        return groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent();
     }
 
     private Group findGroupByIdOrThrowException(Long groupId) {
