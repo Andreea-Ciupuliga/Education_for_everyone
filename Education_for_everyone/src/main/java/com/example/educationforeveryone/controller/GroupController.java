@@ -59,7 +59,7 @@ public class GroupController {
 
     @Operation(summary = "Get all groups", description = "Get all groups")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<GetGroupDto>> getAllGroups() {
         return new ResponseEntity<>(groupService.getAllGroups(), HttpStatus.OK);
     }

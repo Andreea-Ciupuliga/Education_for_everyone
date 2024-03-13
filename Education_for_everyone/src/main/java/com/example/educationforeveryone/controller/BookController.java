@@ -57,7 +57,7 @@ public class BookController {
 
     @Operation(summary = "Get all books", description = "Get a list with all books")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<GetBookDto>> getAllBooks() {
         return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
     }

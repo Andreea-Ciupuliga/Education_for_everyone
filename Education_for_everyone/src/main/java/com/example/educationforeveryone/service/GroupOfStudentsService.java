@@ -14,10 +14,12 @@ import com.example.educationforeveryone.repository.GroupOfStudentsRepository;
 import com.example.educationforeveryone.repository.GroupRepository;
 import com.example.educationforeveryone.repository.ProfessorRepository;
 import com.example.educationforeveryone.repository.StudentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class GroupOfStudentsService {
 
@@ -36,80 +38,30 @@ public class GroupOfStudentsService {
         this.professorRepository = professorRepository;
     }
 
-    public void addStudentInGroup(Long studentId, Long groupId, String username) {
+    public void registerStudentInGroup(Long studentId, Long groupId, String username) {
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new UserNotFoundException("Student not found"));
+        Group group = findGroupByIdOrThrowException(groupId);
 
-        //am nevoie de un obiect de tip student pentru FirstName si LastName
-        Student student = studentRepository.findById(studentId).orElseThrow(() -> new UserNotFoundException("student not found"));
+        validateStudentNotInGroup(studentId, groupId);
+        validateAvailableSeats(group);
 
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("group not found"));
-
-        if (groupOfStudentsRepository.findByStudentIdAndGroupId(studentId, groupId).isPresent()) {
-            throw new UserAlreadyExistException("student already in this group");
-        }
-
-        //verificam daca mai sunt locuri disponibile
-        if (group.getAvailableSeats() <= 0) {
-            throw new GroupOfStudentsException("Not Enough Available Seats");
-        }
-
-
-        //daca este admin poate adauga studentul in grup
-        if (username.equals("admin")) {
-            GroupOfStudents groupOfStudents = buildGroupOfStudents(student, group);
-
-            groupOfStudentsRepository.save(groupOfStudents);
-
-            group.setAvailableSeats(group.getAvailableSeats() - 1);
-            groupRepository.save(group);
-        } else //daca nu e admin inseamna ca este un profesor
-        {
-            //Cautam profesorul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
-            Professor professor = professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
-
-            //daca profesorul preda la grupul in care vrea sa adauge studentul
-            if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent()) {
-                GroupOfStudents groupOfStudents = buildGroupOfStudents(student, group);
-
-                groupOfStudentsRepository.save(groupOfStudents);
-
-                group.setAvailableSeats(group.getAvailableSeats() - 1);
-                groupRepository.save(group);
-            } else if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) {
-                throw new UserNotFoundException("Professor not in this group. You cannot add a student in a group you are not part of");
-            }
+        if (isAdmin(username) || isProfessorTeachingGroup(username, groupId)) {
+            saveGroupOfStudentsAndLog(studentId, groupId, student, group);
+        } else {
+            throw new UserNotFoundException("Professor not in this group. You cannot add a student to a group you are not part of");
         }
     }
 
-
     public void removeStudentFromGroup(Long studentId, Long groupId, String username) {
-
         if (studentRepository.findById(studentId).isEmpty()) {
             throw new UserNotFoundException("student not found");
         }
-
-        Group group = groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("group not found"));
-
-        //vedem daca studentul este in grupul respectiv
-        GroupOfStudents groupOfStudents = groupOfStudentsRepository.findByStudentIdAndGroupId(studentId, groupId).orElseThrow(() -> new DoNotMatchException("Group And Student Do Not Match"));
-
-        //daca e admin poate sterge studentul din grup
-        if (username.equals("admin")) {
-            groupOfStudentsRepository.delete(groupOfStudents);
-            group.setAvailableSeats(group.getAvailableSeats() + 1);
-            groupRepository.save(group);
-        } else //inseamna ca nu e admin deci poate fi profesor
-        {
-            //Cautam profesorul in baza de date dupa username-ul din token ca sa vedem ca exista profesorul respectiv
-            Professor professor = professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
-
-            //daca profesorul preda la grupul din care vrem sa stergem studentul
-            if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent()) {
-                groupOfStudentsRepository.delete(groupOfStudents);
-                group.setAvailableSeats(group.getAvailableSeats() + 1);
-                groupRepository.save(group);
-            } else if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) {
-                throw new UserNotFoundException("Professor not in this group. You delete a student from a group you are not part of");
-            }
+        Group group = findGroupByIdOrThrowException(groupId);
+        GroupOfStudents groupOfStudents = groupOfStudentsRepository.findByStudentIdAndGroupId(studentId, groupId).orElseThrow(() -> new DoNotMatchException("Group snd student do not match"));
+        if (isAdmin(username) || isProfessorTeachingGroup(username, groupId)) {
+            deleteGroupOfStudentsAndLog(studentId, groupId, groupOfStudents, group);
+        } else {
+            throw new UserNotFoundException("Professor not in this group. You cannot delete a student from a group you are not part of");
         }
     }
 
@@ -117,7 +69,48 @@ public class GroupOfStudentsService {
         return groupOfStudentsRepository.findAllStudentsByGroupId(groupId);
     }
 
-    private static GroupOfStudents buildGroupOfStudents(Student student, Group group) {
+    private Group findGroupByIdOrThrowException(Long groupId) {
+        return groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("Group not found"));
+    }
+
+    private boolean isAdmin(String username) {
+        return "admin".equals(username);
+    }
+
+    private boolean isProfessorTeachingGroup(String username, Long groupId) {
+        Professor professor = professorRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("Professor not found"));
+
+        return groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent();
+    }
+
+    private void deleteGroupOfStudentsAndLog(Long studentId, Long groupId, GroupOfStudents groupOfStudents, Group group) {
+        groupOfStudentsRepository.delete(groupOfStudents);
+        log.info("Successfully deleted group of students with id: {} for student with id: {} into group with id: {} and name: {}", groupOfStudents.getId(), studentId, groupId, group.getGroupName());
+        group.setAvailableSeats(group.getAvailableSeats() + 1);
+        groupRepository.save(group);
+    }
+
+    private void saveGroupOfStudentsAndLog(Long studentId, Long groupId, Student student, Group group) {
+        GroupOfStudents savedGroupOfStudents = groupOfStudentsRepository.save(buildGroupOfStudents(student, group));
+        log.info("Successfully saved group of students with id: {} for student with id: {} into group with id: {} and name: {}", savedGroupOfStudents.getId(), studentId, groupId, group.getGroupName());
+        group.setAvailableSeats(group.getAvailableSeats() - 1);
+        groupRepository.save(group);
+    }
+
+    private void validateAvailableSeats(Group group) {
+        if (group.getAvailableSeats() <= 0) {
+            throw new GroupOfStudentsException("Not Enough Available Seats");
+        }
+    }
+
+    private void validateStudentNotInGroup(Long studentId, Long groupId) {
+        if (groupOfStudentsRepository.findByStudentIdAndGroupId(studentId, groupId).isPresent()) {
+            throw new UserAlreadyExistException("Student already in this group");
+        }
+    }
+
+    private GroupOfStudents buildGroupOfStudents(Student student, Group group) {
         return GroupOfStudents.builder()
                 .student(Student.builder().id(student.getId()).build())
                 .group(Group.builder().id(group.getId()).build())
