@@ -30,8 +30,8 @@ public class HomeworkService {
     public void updateHomework(Long homeworkId, Homework newHomework) {
         Homework homework = getHomeworkById(homeworkId);
         setFieldsIfNotNull(newHomework, homework);
-        Homework savedHomework = homeworkRepository.save(homework);
-        log.info("Successfully updated homework with id: {}", savedHomework.getId());
+        homeworkRepository.save(homework);
+        log.info("Successfully updated homework with id: {}", homeworkId);
     }
 
     public Homework getHomeworkById(Long homeworkId) {

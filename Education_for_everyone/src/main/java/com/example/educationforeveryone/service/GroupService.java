@@ -57,8 +57,8 @@ public class GroupService {
             throw new UserNotFoundException("Professor not in this group. You cannot edit a group you are not part of!");
         }
         setFieldsIfNotNull(newRegisterGroupDto, group);
-        Group savedGroup = groupRepository.save(group);
-        log.info("Successfully updated group with id: {}", savedGroup.getId());
+        groupRepository.save(group);
+        log.info("Successfully updated group with id: {}", groupId);
     }
 
     public List<GetGroupDto> getAllGroups() {

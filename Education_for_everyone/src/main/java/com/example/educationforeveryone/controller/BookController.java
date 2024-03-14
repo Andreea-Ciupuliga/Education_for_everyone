@@ -44,7 +44,7 @@ public class BookController {
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping("/{bookId}")
     public ResponseEntity<GetBookDto> getBookById(@PathVariable Long bookId) {
-        return new ResponseEntity<>(bookService.getBook(bookId), HttpStatus.OK);
+        return new ResponseEntity<>(bookService.getBookById(bookId), HttpStatus.OK);
     }
 
     @Operation(summary = "Update a book", description = "Update a book")
