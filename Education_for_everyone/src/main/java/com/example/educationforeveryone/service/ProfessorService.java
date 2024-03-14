@@ -46,7 +46,7 @@ public class ProfessorService {
         if (username.equals("admin") || username.equals(professor.getUsername())) { // If it is an admin or if it is the actual professor
             professorRepository.delete(professor);
             log.info("Successfully deleted professor with id: {}", professorId);
-        } else if (!(username.equals(professor.getUsername()))) {
+        } else {
             throw new UserNotFoundException("You cannot delete another teacher's account!");
         }
     }
@@ -62,7 +62,7 @@ public class ProfessorService {
             setFieldsIfNotNull(newRegisterProfessorDto, professor);
             professorRepository.save(professor);
             log.info("Successfully updated professor with id: {}", professorId);
-        } else if (!(username.equals(professor.getUsername()))) {
+        } else {
             throw new UserNotFoundException("You cannot edit another teacher's account!");
         }
     }
@@ -99,23 +99,24 @@ public class ProfessorService {
     }
 
     private void setFieldsIfNotNull(RegisterProfessorDto newRegisterProfessorDto, Professor professor) {
-        if (newRegisterProfessorDto.getFirstName() != null)
+        if (newRegisterProfessorDto.getFirstName() != null) {
             professor.setFirstName(newRegisterProfessorDto.getFirstName());
-
-        if (newRegisterProfessorDto.getLastName() != null)
+        }
+        if (newRegisterProfessorDto.getLastName() != null) {
             professor.setLastName(newRegisterProfessorDto.getLastName());
-
-        if (newRegisterProfessorDto.getEmail() != null)
+        }
+        if (newRegisterProfessorDto.getEmail() != null) {
             professor.setEmail(newRegisterProfessorDto.getEmail());
-
-        if (newRegisterProfessorDto.getPassword() != null)
+        }
+        if (newRegisterProfessorDto.getPassword() != null) {
             professor.setPassword(newRegisterProfessorDto.getPassword());
-
-        if (newRegisterProfessorDto.getUsername() != null)
+        }
+        if (newRegisterProfessorDto.getUsername() != null) {
             professor.setUsername(newRegisterProfessorDto.getUsername());
-
-        if (newRegisterProfessorDto.getSubject() != null)
+        }
+        if (newRegisterProfessorDto.getSubject() != null) {
             professor.setSubject(newRegisterProfessorDto.getSubject());
+        }
     }
 
     private Professor buildProfessor(RegisterProfessorDto registerProfessorDto) {

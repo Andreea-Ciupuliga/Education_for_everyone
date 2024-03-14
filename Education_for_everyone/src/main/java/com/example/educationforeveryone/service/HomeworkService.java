@@ -39,14 +39,15 @@ public class HomeworkService {
     }
 
     private void setFieldsIfNotNull(Homework newHomework, Homework homework) {
-        if (newHomework.getDeadline() != null)
+        if (newHomework.getDeadline() != null) {
             homework.setDeadline(newHomework.getDeadline());
-
-        if (newHomework.getTask() != null)
+        }
+        if (newHomework.getTask() != null) {
             homework.setTask(newHomework.getTask());
-
-        if (newHomework.getPoints() != null)
+        }
+        if (newHomework.getPoints() != null) {
             homework.setPoints(newHomework.getPoints());
+        }
     }
 
     private Homework buildHomework(Homework homework) {
