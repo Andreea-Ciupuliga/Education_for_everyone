@@ -57,8 +57,8 @@ public class GroupService {
             throw new UserNotFoundException("Professor not in this group. You cannot edit a group you are not part of!");
         }
         setFieldsIfNotNull(newRegisterGroupDto, group);
-        Group savedGroup = groupRepository.save(group);
-        log.info("Successfully updated group with id: {}", savedGroup.getId());
+        groupRepository.save(group);
+        log.info("Successfully updated group with id: {}", groupId);
     }
 
     public List<GetGroupDto> getAllGroups() {
@@ -99,20 +99,21 @@ public class GroupService {
     }
 
     private void setFieldsIfNotNull(RegisterGroupDto newRegisterGroupDto, Group group) {
-        if (newRegisterGroupDto.getGroupName() != null)
+        if (newRegisterGroupDto.getGroupName() != null) {
             group.setGroupName(newRegisterGroupDto.getGroupName());
-
-        if (newRegisterGroupDto.getSubject() != null)
+        }
+        if (newRegisterGroupDto.getSubject() != null) {
             group.setSubject(newRegisterGroupDto.getSubject());
-
-        if (newRegisterGroupDto.getYearOfStudy() != null)
+        }
+        if (newRegisterGroupDto.getYearOfStudy() != null) {
             group.setYearOfStudy(newRegisterGroupDto.getYearOfStudy());
-
-        if (newRegisterGroupDto.getAvailableSeats() != null)
+        }
+        if (newRegisterGroupDto.getAvailableSeats() != null) {
             group.setAvailableSeats(newRegisterGroupDto.getAvailableSeats());
-
-        if (newRegisterGroupDto.getTotalSeats() != null)
+        }
+        if (newRegisterGroupDto.getTotalSeats() != null) {
             group.setTotalSeats(newRegisterGroupDto.getTotalSeats());
+        }
     }
 
     private Group buildGroup(RegisterGroupDto registerGroupDto, Professor professor) {

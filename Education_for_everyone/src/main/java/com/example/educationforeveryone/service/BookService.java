@@ -29,21 +29,21 @@ public class BookService {
     }
 
     public void removeBook(Long bookId) {
-        Book book = getBookOrThrowNotFoundException(bookId);
+        Book book = findBookByIdOrThrowNotFoundException(bookId);
         bookRepository.delete(book);
         log.info("Successfully removed book with id: {}", bookId);
     }
 
-    public GetBookDto getBook(Long bookId) {
-        Book book = getBookOrThrowNotFoundException(bookId);
+    public GetBookDto getBookById(Long bookId) {
+        Book book = findBookByIdOrThrowNotFoundException(bookId);
         return buildGetBookDto(book);
     }
 
     public void updateBook(Long bookId, RegisterBookDto newRegisterBookDto) {
-        Book book = getBookOrThrowNotFoundException(bookId);
+        Book book = findBookByIdOrThrowNotFoundException(bookId);
         setFieldsIfNotNull(newRegisterBookDto, book);
-        Book savedBook = bookRepository.save(book);
-        log.info("Successfully updated book with id: {}", savedBook.getId());
+        bookRepository.save(book);
+        log.info("Successfully updated book with id: {}", bookId);
     }
 
     public List<GetBookDto> getAllBooks() {
@@ -85,7 +85,7 @@ public class BookService {
         }
     }
 
-    private Book getBookOrThrowNotFoundException(Long bookId) {
+    private Book findBookByIdOrThrowNotFoundException(Long bookId) {
         return bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book not found"));
     }
 
