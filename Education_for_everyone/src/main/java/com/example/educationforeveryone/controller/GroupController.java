@@ -52,7 +52,7 @@ public class GroupController {
     @Operation(summary = "Update a group", description = "Update a group")
     @PreAuthorize("hasAnyRole('PROFESSOR')")
     @PutMapping("/{group-id}")
-    public ResponseEntity<SuccessDto> putGroup(@PathVariable("group-id") Long groupId, @RequestBody RegisterGroupDto registerGroupDto, Authentication authentication) {
+    public ResponseEntity<SuccessDto> updateGroup(@PathVariable("group-id") Long groupId, @RequestBody RegisterGroupDto registerGroupDto, Authentication authentication) {
         groupService.updateGroup(groupId, registerGroupDto, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
