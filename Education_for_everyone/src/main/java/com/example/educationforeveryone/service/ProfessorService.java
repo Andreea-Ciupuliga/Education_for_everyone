@@ -37,7 +37,7 @@ public class ProfessorService {
         }
         Professor savedProfessor = professorRepository.save(buildProfessor(registerProfessorDto));
         log.info("Successfully saved professor with id: {}", savedProfessor.getId());
-        sendRegisterMail(registerProfessorDto);
+        sendEmailService.sendRegisterMail(registerProfessorDto.getFirstName(), registerProfessorDto.getLastName(), registerProfessorDto.getUsername(), registerProfessorDto.getEmail());
         keycloakAdminService.registerUser(registerProfessorDto.getUsername(), registerProfessorDto.getPassword(), "ROLE_PROFESSOR");
     }
 
@@ -86,12 +86,6 @@ public class ProfessorService {
     public void removeAllProfessors() {
         professorRepository.deleteAll();
         log.info("Successfully deleted all professors");
-    }
-
-    private void sendRegisterMail(RegisterProfessorDto registerProfessorDto) {
-        String body = "Hello " + registerProfessorDto.getFirstName() + " " + registerProfessorDto.getLastName() + " you registered with your username: " + registerProfessorDto.getUsername();
-        sendEmailService.sendEmail(registerProfessorDto.getEmail(), body, "Register");
-        log.info("Successfully send mail");
     }
 
     private Professor findProfessorByIdOrThrowException(Long professorId) {
