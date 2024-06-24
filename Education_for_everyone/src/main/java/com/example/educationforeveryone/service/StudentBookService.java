@@ -52,7 +52,7 @@ public class StudentBookService {
     }
 
     public List<String> getAllStudentBooks(Long studentId) {
-        studentService.getStudentByIdOrThrowException(studentId);
+        studentService.checkStudentExistsOrThrowException(studentId);
         return studentBookRepository.findTitleByStudentId(studentId);
     }
 

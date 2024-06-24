@@ -29,18 +29,18 @@ public class BookService {
     }
 
     public void removeBook(Long bookId) {
-        Book book = findBookByIdOrThrowNotFoundException(bookId);
+        Book book = getBookByIdOrThrowNotFoundException(bookId);
         bookRepository.delete(book);
         log.info("Successfully removed book with id: {}", bookId);
     }
 
     public GetBookDto getBookById(Long bookId) {
-        Book book = findBookByIdOrThrowNotFoundException(bookId);
+        Book book = getBookByIdOrThrowNotFoundException(bookId);
         return buildGetBookDto(book);
     }
 
     public void updateBook(Long bookId, RegisterBookDto newRegisterBookDto) {
-        Book book = findBookByIdOrThrowNotFoundException(bookId);
+        Book book = getBookByIdOrThrowNotFoundException(bookId);
         setFieldsIfNotNull(newRegisterBookDto, book);
         bookRepository.save(book);
         log.info("Successfully updated book with id: {}", bookId);
@@ -65,7 +65,7 @@ public class BookService {
     public List<GetBookDto> getAllBooksByAuthor(String author) {
         List<GetBookDto> booksByAuthor = bookRepository.findAllByAuthorContains(author);
         if (booksByAuthor.isEmpty()) {
-            throw new BookNotFoundException("Author Not Found");
+            throw new BookNotFoundException("No books found for this author!");
         }
         return booksByAuthor;
     }
@@ -85,8 +85,8 @@ public class BookService {
         }
     }
 
-    private Book findBookByIdOrThrowNotFoundException(Long bookId) {
-        return bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book not found"));
+    Book getBookByIdOrThrowNotFoundException(Long bookId) {
+        return bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book not found!"));
     }
 
     private Book buildBook(RegisterBookDto registerBookDto) {

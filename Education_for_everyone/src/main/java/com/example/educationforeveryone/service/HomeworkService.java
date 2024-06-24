@@ -1,6 +1,7 @@
 package com.example.educationforeveryone.service;
 
 import com.example.educationforeveryone.exceptions.notFoundException.HomeworkNotFoundException;
+import com.example.educationforeveryone.exceptions.notFoundException.UserNotFoundException;
 import com.example.educationforeveryone.models.Homework;
 import com.example.educationforeveryone.repository.HomeworkRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,20 +23,26 @@ public class HomeworkService {
     }
 
     public void removeHomework(Long homeworkId) {
-        Homework homework = getHomeworkById(homeworkId);
+        Homework homework = getHomeworkByIdOrThrowException(homeworkId);
         homeworkRepository.delete(homework);
-        log.info("Successfully deleted homework with id: {}", homeworkId);
+        log.info("Successfully removed homework with id: {}", homeworkId);
     }
 
     public void updateHomework(Long homeworkId, Homework newHomework) {
-        Homework homework = getHomeworkById(homeworkId);
+        Homework homework = getHomeworkByIdOrThrowException(homeworkId);
         setFieldsIfNotNull(newHomework, homework);
         homeworkRepository.save(homework);
         log.info("Successfully updated homework with id: {}", homeworkId);
     }
 
-    public Homework getHomeworkById(Long homeworkId) {
-        return homeworkRepository.findById(homeworkId).orElseThrow(() -> new HomeworkNotFoundException("Homework not found"));
+    public Homework getHomeworkByIdOrThrowException(Long homeworkId) {
+        return homeworkRepository.findById(homeworkId).orElseThrow(() -> new HomeworkNotFoundException("Homework not found!"));
+    }
+
+    public void checkHomeworkExistsOrThrowException(Long homeworkId) {
+        if (!homeworkRepository.existsById(homeworkId)) {
+            throw new UserNotFoundException("Homework not found!");
+        }
     }
 
     private void setFieldsIfNotNull(Homework newHomework, Homework homework) {

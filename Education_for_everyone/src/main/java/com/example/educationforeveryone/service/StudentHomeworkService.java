@@ -45,8 +45,7 @@ public class StudentHomeworkService {
     public void registerStudentHomework(Long studentId, Long homeworkId, String username) {
         Student student = studentService.getStudentByIdOrThrowException(studentId);
         Homework homework = homeworkService.getHomeworkByIdOrThrowException(homeworkId);
-        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
-        validateProfessorInStudentGroups(studentId, professor);
+        validateProfessorInStudentGroups(studentId, username);
         checkIfHomeworkIsAlreadyAssigned(studentId, homeworkId);
         StudentHomework savedStudentHomework = studentHomeworkRepository.save(buildStudentHomework(student, homework));
         log.info("Successfully saved studentHomework with id: {}", savedStudentHomework.getId());
@@ -57,10 +56,10 @@ public class StudentHomeworkService {
         Student student = studentService.getStudentByIdOrThrowException(studentId);
         Homework homework = homeworkService.getHomeworkByIdOrThrowException(homeworkId);
         StudentHomework studentHomework = getStudentHomeworkOrThrowException(studentId, homeworkId);
-        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
-        validateProfessorInStudentGroups(studentId, professor);
+        validateProfessorInStudentGroups(studentId, username);
         validateAndSetScore(score, homework, studentHomework);
         studentHomeworkRepository.save(studentHomework);
+        log.info("Successfully assigned score: {} for studentHomework with id: {} to student with id: {} and homework with id: {} ", score, studentHomework.getId(), studentId, homeworkId);
         emailService.sendHomeworkScoreEmail(score, student, homework);
     }
 
@@ -68,9 +67,9 @@ public class StudentHomeworkService {
         studentService.checkStudentExistsOrThrowException(studentId);
         homeworkService.checkHomeworkExistsOrThrowException(homeworkId);
         StudentHomework studentHomework = getStudentHomeworkOrThrowException(studentId, homeworkId);
-        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
-        validateProfessorInStudentGroups(studentId, professor);
+        validateProfessorInStudentGroups(studentId, username);
         studentHomeworkRepository.delete(studentHomework);
+        log.info("Successfully removed studentHomework with id: {}", studentHomework.getId());
     }
 
     public List<String> getStudentGrades(String username, Long studentId) {
@@ -87,16 +86,14 @@ public class StudentHomeworkService {
     }
 
     private void validateAndSetScore(Long score, Homework homework, StudentHomework studentHomework) {
-        validateScore(score, homework);
+        if (score > homework.getPoints()) {
+            throw new GradeException("The score exceeds the points assigned to this homework!");
+        }
         studentHomework.setScore(score);
     }
 
-    private void validateScore(Long score, Homework homework) {
-        if (score > homework.getPoints())
-            throw new GradeException("The score exceeds the points assigned to this homework!");
-    }
-
-    private void validateProfessorInStudentGroups(Long studentId, Professor professor) {
+    private void validateProfessorInStudentGroups(Long studentId, String username) {
+        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
         List<Long> groupIds = studentGroupRepository.findGroupIdsByStudentId(studentId);
         boolean isPresent = false;
         for (Long groupId : groupIds) {
@@ -111,9 +108,8 @@ public class StudentHomeworkService {
     }
 
     private StudentHomework getStudentHomeworkOrThrowException(Long studentId, Long homeworkId) {
-        StudentHomework studentHomework = studentHomeworkRepository.findByStudentIdAndHomeworkId(studentId, homeworkId)
+        return studentHomeworkRepository.findByStudentIdAndHomeworkId(studentId, homeworkId)
                 .orElseThrow(() -> new DoNotMatchException("Homework and student do not match!"));
-        return studentHomework;
     }
 
     private void checkIfHomeworkIsAlreadyAssigned(Long studentId, Long homeworkId) {

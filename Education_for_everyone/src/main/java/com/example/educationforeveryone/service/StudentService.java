@@ -1,6 +1,5 @@
 package com.example.educationforeveryone.service;
 
-import com.example.educationforeveryone.SendEmailService;
 import com.example.educationforeveryone.dtos.GetStudentDto;
 import com.example.educationforeveryone.dtos.RegisterStudentDto;
 import com.example.educationforeveryone.exceptions.alreadyExistException.UserAlreadyExistException;
@@ -15,31 +14,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 public class StudentService {
 
     private final StudentRepository studentRepository;
-    private final SendEmailService sendEmailService;
+    private final EmailService emailService;
     private final KeycloakAdminService keycloakAdminService;
     private final GroupRepository groupRepository;
     private final BookRepository bookRepository;
 
     public StudentService(StudentRepository studentRepository,
-                          SendEmailService sendEmailService,
+                          EmailService emailService,
                           KeycloakAdminService keycloakAdminService,
                           GroupRepository groupRepository,
                           BookRepository bookRepository) {
         this.studentRepository = studentRepository;
-        this.sendEmailService = sendEmailService;
+        this.emailService = emailService;
         this.keycloakAdminService = keycloakAdminService;
         this.groupRepository = groupRepository;
         this.bookRepository = bookRepository;
     }
 
     public void registerStudent(RegisterStudentDto registerStudentDto) {
-        if (studentRepository.findByUsername(registerStudentDto.getUsername()).isPresent()) {
+        if (getStudentByUsername(registerStudentDto.getUsername()).isPresent()) {
             throw new UserAlreadyExistException("Username already exist!");
         }
         if (studentRepository.findByEmail(registerStudentDto.getEmail()).isPresent()) {
@@ -47,12 +47,12 @@ public class StudentService {
         }
         Student savedStudent = studentRepository.save(buildStudent(registerStudentDto));
         log.info("Successfully created student with id: {}", savedStudent.getId());
-        sendEmailService.sendRegisterMail(registerStudentDto.getFirstName(), registerStudentDto.getLastName(), registerStudentDto.getUsername(), registerStudentDto.getEmail());
+        emailService.sendRegisterMail(registerStudentDto.getFirstName(), registerStudentDto.getLastName(), registerStudentDto.getUsername(), registerStudentDto.getEmail());
         keycloakAdminService.registerUser(registerStudentDto.getUsername(), registerStudentDto.getPassword(), "ROLE_STUDENT");
     }
 
     public void removeStudent(Long studentId, String username) {
-        Student student = findStudentByIdOrThrowException(studentId);
+        Student student = getStudentByIdOrThrowException(studentId);
         validateUser(student, username);
         removeStudentFromGroups(studentId);
         increaseAvailableCopiesOfBooks(studentId);
@@ -61,12 +61,20 @@ public class StudentService {
     }
 
     public GetStudentDto getStudentById(Long studentId) {
-        Student student = findStudentByIdOrThrowException(studentId);
+        Student student = getStudentByIdOrThrowException(studentId);
         return buildStudentDto(student);
     }
 
+    public Optional<Student> getStudentByUsername(String username) {
+        return studentRepository.findByUsername(username);
+    }
+
+    Student getStudentByUsernameOrThrowException(String username) {
+        return getStudentByUsername(username).orElseThrow(() -> new UserNotFoundException("Student not found!"));
+    }
+
     public void updateStudent(Long studentId, RegisterStudentDto newRegisterStudentDto, String username) {
-        Student student = findStudentByIdOrThrowException(studentId);
+        Student student = getStudentByIdOrThrowException(studentId);
         validateUser(student, username);
         setFieldsIfNotNull(newRegisterStudentDto, student);
         studentRepository.save(student);
@@ -100,17 +108,17 @@ public class StudentService {
     }
 
     private void increaseAvailableCopiesOfBooks(Long studentId) {
-        List<Book> books = bookRepository.findBooksByStudentId(studentId); // We see the list of books borrowed by the student.
+        List<Book> books = bookRepository.findBooksByStudentId(studentId);
         books.forEach(book -> {
-            book.setAvailableCopies(book.getAvailableCopies() + 1); // For each book individually, we increase the number of available copies because we will remove the student who owns them.
+            book.setAvailableCopies(book.getAvailableCopies() + 1); // We increase the number of available copies because we will remove the student who owns them.
             bookRepository.save(book);
         });
     }
 
     private void removeStudentFromGroups(Long studentId) {
-        List<Group> groups = groupRepository.findGroupsByStudentId(studentId); // We check the list of groups to which the student belongs because if we delete the student, we want to remove them from the groups they belong to.
+        List<Group> groups = groupRepository.findGroupsByStudentId(studentId);
         groups.forEach(group -> {
-            group.setAvailableSeats(group.getAvailableSeats() + 1); // For each group individually, we increase the number of available seats because we will remove the student who was part of them.
+            group.setAvailableSeats(group.getAvailableSeats() + 1); // We increase the number of available seats because we will remove the student who was part of them.
             groupRepository.save(group);
         });
     }
@@ -133,8 +141,14 @@ public class StudentService {
         }
     }
 
-    private Student findStudentByIdOrThrowException(Long studentId) {
+    Student getStudentByIdOrThrowException(Long studentId) {
         return studentRepository.findById(studentId).orElseThrow(() -> new UserNotFoundException("Student not found!"));
+    }
+
+    public void checkStudentExistsOrThrowException(Long studentId) {
+        if (!studentRepository.existsById(studentId)) {
+            throw new UserNotFoundException("Student not found!");
+        }
     }
 
     private Student buildStudent(RegisterStudentDto registerStudentDto) {
