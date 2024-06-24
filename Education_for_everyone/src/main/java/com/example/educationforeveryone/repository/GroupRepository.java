@@ -18,7 +18,10 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
     List<GetGroupDto> findAllGroups();
 
     @Query("SELECT g from Group g where g.professor.id =:professorId AND g.id =:groupId")
-    Optional<Group> findByProfessorIdAndGroupId(@Param("professorId") Long studentId, @Param("groupId") Long groupId);
+    Optional<Group> findByProfessorIdAndGroupId(@Param("professorId") Long professorId, @Param("groupId") Long groupId);
+
+    @Query("SELECT g from Group g JOIN StudentGroup gs where gs.student.id =:studentId")
+    List<Group> findGroupsByStudentId(@Param("studentId") Long studentId);
 
     @Query("SELECT new com.example.educationforeveryone.dtos.GetGroupDto(g.groupName, g.subject, g.yearOfStudy, g.availableSeats , p.lastName, p.firstName) FROM Group g join Professor p  on g.professor.id = p.id WHERE g.subject LIKE %:subject%")
     List<GetGroupDto> findAllBySubjectContains(@Param("subject") String subject);
