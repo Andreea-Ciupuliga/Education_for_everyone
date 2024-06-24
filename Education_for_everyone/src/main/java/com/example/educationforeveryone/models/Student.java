@@ -42,9 +42,9 @@ public class Student {
 
     @JsonIgnore
     @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.ALL})
-    List<StudentsBorrowBooks> studentsBorrowBooks;
+    List<StudentBook> studentsBorrowBooks;
 
     @JsonIgnore
     @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = {CascadeType.ALL})
-    List<Grade> grade;
+    List<StudentHomework> studentHomework;
 }

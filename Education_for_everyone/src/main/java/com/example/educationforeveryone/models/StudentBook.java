@@ -11,11 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "GRADE")
-public class Grade {
+@Table(name = "STUDENT_BOOK")
+public class StudentBook {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "TITLE")
+    private String title;
 
     @Column(name = "STUDENT_FIRST_NAME")
     private String studentFirstName;
@@ -23,14 +27,9 @@ public class Grade {
     @Column(name = "STUDENT_LAST_NAME")
     private String studentLastName;
 
-    @Column(name = "SCORE")
-    private Long score;
-
     @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "STUDENT_ID")
     private Student student;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "HOMEWORK_ID")
-    private Homework homework;
+    private Book book;
 }
