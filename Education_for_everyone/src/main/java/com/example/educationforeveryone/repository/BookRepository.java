@@ -23,4 +23,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT new com.example.educationforeveryone.dtos.GetBookDto(b.title, b.author, b.availableCopies) FROM Book b")
     List<GetBookDto> findAllBooks();
 
+    @Query("SELECT b FROM Book b JOIN StudentBook sb WHERE sb.student.id=:studentId")
+    List<Book> findBooksByStudentId(@Param("studentId") Long studentId);
+
 }

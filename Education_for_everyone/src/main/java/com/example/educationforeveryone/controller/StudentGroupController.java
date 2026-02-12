@@ -1,7 +1,7 @@
 package com.example.educationforeveryone.controller;
 
 import com.example.educationforeveryone.dtos.GetStudentDto;
-import com.example.educationforeveryone.service.GroupOfStudentsService;
+import com.example.educationforeveryone.service.StudentGroupService;
 import com.example.educationforeveryone.utils.Helper;
 import com.example.educationforeveryone.utils.SuccessDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,19 +17,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/group-of-students")
 @Tag(name = "/group-of-students", description = "group-of-students controller")
-public class GroupOfStudentsController {
+public class StudentGroupController {
 
-    private final GroupOfStudentsService groupOfStudentsService;
+    private final StudentGroupService studentGroupService;
 
-    public GroupOfStudentsController(GroupOfStudentsService groupOfStudentsService) {
-        this.groupOfStudentsService = groupOfStudentsService;
+    public StudentGroupController(StudentGroupService studentGroupService) {
+        this.studentGroupService = studentGroupService;
     }
 
     @Operation(summary = "Register a student into a group", description = "Register a student into a group using student id and group id")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @PostMapping("/register/{studentId}/{groupId}")
     public ResponseEntity<SuccessDto> registerStudentInGroup(@PathVariable Long studentId, @PathVariable Long groupId, Authentication authentication) {
-        groupOfStudentsService.registerStudentInGroup(studentId, groupId, Helper.getKeycloakUser(authentication));
+        studentGroupService.registerStudentInGroup(studentId, groupId, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -37,7 +37,7 @@ public class GroupOfStudentsController {
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @DeleteMapping("/{studentId}/{groupId}")
     public ResponseEntity<SuccessDto> removeStudentFromGroup(@PathVariable Long studentId, @PathVariable Long groupId, Authentication authentication) {
-        groupOfStudentsService.removeStudentFromGroup(studentId, groupId, Helper.getKeycloakUser(authentication));
+        studentGroupService.removeStudentFromGroup(studentId, groupId, Helper.getKeycloakUser(authentication));
         return new ResponseEntity<>(new SuccessDto(), HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class GroupOfStudentsController {
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR','STUDENT')")
     @GetMapping("/{groupId}/students")
     public List<GetStudentDto> getAllStudentsByGroupId(@PathVariable Long groupId) {
-        return groupOfStudentsService.getAllStudentsByGroupId(groupId);
+        return studentGroupService.getAllStudentsByGroupId(groupId);
     }
 }
 

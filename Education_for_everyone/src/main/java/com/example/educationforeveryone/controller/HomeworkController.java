@@ -33,7 +33,7 @@ public class HomeworkController {
     @PreAuthorize("hasAnyRole('ADMIN','PROFESSOR')")
     @GetMapping("/{homeworkId}")
     public ResponseEntity<Homework> getHomeworkById(@PathVariable Long homeworkId) {
-        return new ResponseEntity<>(homeworkService.getHomeworkById(homeworkId), HttpStatus.OK);
+        return new ResponseEntity<>(homeworkService.getHomeworkByIdOrThrowException(homeworkId), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete homework by id", description = "Delete homework by its id")

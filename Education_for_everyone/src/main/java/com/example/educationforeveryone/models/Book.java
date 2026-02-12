@@ -35,5 +35,5 @@ public class Book {
 
     @JsonIgnore
     @OneToMany(mappedBy = "book", orphanRemoval = true, cascade = {CascadeType.ALL})
-    List<StudentsBorrowBooks> studentsBorrowBooks;
+    List<StudentBook> studentsBorrowBooks;
 }

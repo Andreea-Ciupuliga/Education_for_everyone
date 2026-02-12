@@ -1,6 +1,5 @@
 package com.example.educationforeveryone.service;
 
-import com.example.educationforeveryone.SendEmailService;
 import com.example.educationforeveryone.dtos.GetProfessorDto;
 import com.example.educationforeveryone.dtos.RegisterProfessorDto;
 import com.example.educationforeveryone.exceptions.alreadyExistException.UserAlreadyExistException;
@@ -17,14 +16,14 @@ import java.util.List;
 public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
-    private final SendEmailService sendEmailService;
+    private final EmailService emailService;
     private final KeycloakAdminService keycloakAdminService;
 
     public ProfessorService(ProfessorRepository professorRepository,
-                            SendEmailService sendEmailService,
+                            EmailService emailService,
                             KeycloakAdminService keycloakAdminService) {
         this.professorRepository = professorRepository;
-        this.sendEmailService = sendEmailService;
+        this.emailService = emailService;
         this.keycloakAdminService = keycloakAdminService;
     }
 
@@ -37,12 +36,12 @@ public class ProfessorService {
         }
         Professor savedProfessor = professorRepository.save(buildProfessor(registerProfessorDto));
         log.info("Successfully saved professor with id: {}", savedProfessor.getId());
-        sendEmailService.sendRegisterMail(registerProfessorDto.getFirstName(), registerProfessorDto.getLastName(), registerProfessorDto.getUsername(), registerProfessorDto.getEmail());
+        emailService.sendRegisterMail(registerProfessorDto.getFirstName(), registerProfessorDto.getLastName(), registerProfessorDto.getUsername(), registerProfessorDto.getEmail());
         keycloakAdminService.registerUser(registerProfessorDto.getUsername(), registerProfessorDto.getPassword(), "ROLE_PROFESSOR");
     }
 
     public void removeProfessor(Long professorId, String username) {
-        Professor professor = findProfessorByIdOrThrowException(professorId);
+        Professor professor = getProfessorByIdOrThrowException(professorId);
         if (username.equals("admin") || username.equals(professor.getUsername())) { // If it is an admin or if it is the actual professor
             professorRepository.delete(professor);
             log.info("Successfully deleted professor with id: {}", professorId);
@@ -52,12 +51,12 @@ public class ProfessorService {
     }
 
     public GetProfessorDto getProfessorById(Long professorId) {
-        Professor professor = findProfessorByIdOrThrowException(professorId);
+        Professor professor = getProfessorByIdOrThrowException(professorId);
         return buildGetProfessorDto(professor);
     }
 
     public void updateProfessor(Long professorId, RegisterProfessorDto newRegisterProfessorDto, String username) {
-        Professor professor = findProfessorByIdOrThrowException(professorId);
+        Professor professor = getProfessorByIdOrThrowException(professorId);
         if (username.equals("admin") || username.equals(professor.getUsername())) {
             setFieldsIfNotNull(newRegisterProfessorDto, professor);
             professorRepository.save(professor);
@@ -88,8 +87,12 @@ public class ProfessorService {
         log.info("Successfully deleted all professors");
     }
 
-    private Professor findProfessorByIdOrThrowException(Long professorId) {
-        return professorRepository.findById(professorId).orElseThrow(() -> new UserNotFoundException("Professor not found"));
+    Professor getProfessorByIdOrThrowException(Long professorId) {
+        return professorRepository.findById(professorId).orElseThrow(() -> new UserNotFoundException("Professor not found!"));
+    }
+
+    Professor getProfessorByUsernameOrThrowException(String username) {
+        return professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("Professor not found!"));
     }
 
     private void setFieldsIfNotNull(RegisterProfessorDto newRegisterProfessorDto, Professor professor) {
@@ -121,6 +124,10 @@ public class ProfessorService {
                 .password(registerProfessorDto.getPassword())
                 .username(registerProfessorDto.getUsername())
                 .subject(registerProfessorDto.getSubject()).build();
+    }
+
+    boolean checkIfProfessorExists(String username) {
+        return professorRepository.findByUsername(username).isPresent();
     }
 
     private GetProfessorDto buildGetProfessorDto(Professor professor) {

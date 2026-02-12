@@ -1,4 +1,4 @@
-package com.example.Education_for_everyone.utils;
+package com.example.educationforeveryone.utils;
 
 import org.keycloak.KeycloakPrincipal;
 import org.springframework.security.core.Authentication;

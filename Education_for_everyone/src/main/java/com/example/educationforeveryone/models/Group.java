@@ -39,7 +39,7 @@ public class Group {
 
     @JsonIgnore
     @OneToMany(mappedBy = "group", orphanRemoval = true, cascade = {CascadeType.ALL})
-    List<GroupOfStudents> groupOfStudents;
+    List<StudentGroup> studentGroups;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     private Professor professor;

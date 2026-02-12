@@ -8,7 +8,6 @@ import com.example.educationforeveryone.exceptions.notFoundException.UserNotFoun
 import com.example.educationforeveryone.models.Group;
 import com.example.educationforeveryone.models.Professor;
 import com.example.educationforeveryone.repository.GroupRepository;
-import com.example.educationforeveryone.repository.ProfessorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +18,18 @@ import java.util.List;
 public class GroupService {
 
     private final GroupRepository groupRepository;
-    private final ProfessorRepository professorRepository;
+    private final ProfessorService professorService;
 
-    public GroupService(GroupRepository groupRepository, ProfessorRepository professorRepository) {
+    public GroupService(GroupRepository groupRepository, ProfessorService professorService) {
         this.groupRepository = groupRepository;
-        this.professorRepository = professorRepository;
+        this.professorService = professorService;
     }
 
     public void registerGroup(RegisterGroupDto registerGroupDto, String username) {
         if (groupRepository.findByGroupName(registerGroupDto.getGroupName()).isPresent()) {
             throw new GroupAlreadyExistException("Group already exist!");
         }
-        Professor professor = findProfessorByUsernameOrThrowException(username);
+        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
         Group savedGroup = groupRepository.save(buildGroup(registerGroupDto, professor));
         log.info("Successfully saved group with id: {}", savedGroup.getId());
     }
@@ -52,7 +51,7 @@ public class GroupService {
 
     public void updateGroup(Long groupId, RegisterGroupDto newRegisterGroupDto, String username) {
         Group group = findGroupByIdOrThrowException(groupId);
-        Professor professor = findProfessorByUsernameOrThrowException(username);
+        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
         if (groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isEmpty()) {
             throw new UserNotFoundException("Professor not in this group. You cannot edit a group you are not part of!");
         }
@@ -64,7 +63,7 @@ public class GroupService {
     public List<GetGroupDto> getAllGroups() {
         List<GetGroupDto> allGroups = groupRepository.findAllGroups();
         if (allGroups.isEmpty()) {
-            throw new GroupNotFoundException("There are no groups to display");
+            throw new GroupNotFoundException("There are no groups to display!");
         }
         return allGroups;
     }
@@ -72,7 +71,7 @@ public class GroupService {
     public List<GetGroupDto> getAllGroupsBySubject(String subject) {
         List<GetGroupDto> groupsBySubject = groupRepository.findAllBySubjectContains(subject);
         if (groupsBySubject.isEmpty()) {
-            throw new GroupNotFoundException("Subject Not Found");
+            throw new GroupNotFoundException("Groups not found for this subject!");
         }
         return groupsBySubject;
     }
@@ -80,22 +79,23 @@ public class GroupService {
     public List<GetGroupDto> getAllGroupsByProfessorName(String professorName) {
         List<GetGroupDto> groupsByProfessorName = groupRepository.findAllByProfessorNameContains(professorName);
         if (groupsByProfessorName.isEmpty()) {
-            throw new UserNotFoundException("Professor Not Found");
+            throw new UserNotFoundException("Groups not found for this professor name!");
         }
         return groupsByProfessorName;
     }
 
     private boolean isProfessorInGroup(String username, Long groupId) {
-        Professor professor = findProfessorByUsernameOrThrowException(username);
+        Professor professor = professorService.getProfessorByUsernameOrThrowException(username);
         return groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent();
     }
 
-    private Group findGroupByIdOrThrowException(Long groupId) {
-        return groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("Group not found"));
+    boolean isProfessorInGroup(Long professorId, Long groupId) {
+        Professor professor = professorService.getProfessorByIdOrThrowException(professorId);
+        return groupRepository.findByProfessorIdAndGroupId(professor.getId(), groupId).isPresent();
     }
 
-    private Professor findProfessorByUsernameOrThrowException(String username) {
-        return professorRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("professor not found"));
+    Group findGroupByIdOrThrowException(Long groupId) {
+        return groupRepository.findById(groupId).orElseThrow(() -> new GroupNotFoundException("Group not found!"));
     }
 
     private void setFieldsIfNotNull(RegisterGroupDto newRegisterGroupDto, Group group) {
